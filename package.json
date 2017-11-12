@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --progress --colors --hot --config ./webpack.config.js",
+    "start": "webpack-dev-server --progress --colors --hot --config ./config/webpack.dev.config.js && NODE_ENV=development",
+    "build": "webpack --progress --colors --hot --config ./config/webpack.prd.config.js && NODE_ENV=production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
