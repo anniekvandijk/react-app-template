@@ -1,6 +1,4 @@
 const path = require('path');
-const hostEnv = require('./environment');
-const config = require('./config');
 
 module.exports = {
     entry: [
@@ -21,7 +19,7 @@ module.exports = {
         extensions: ['*', '.js', '.jsx']
     },
     output: {
-        path: __dirname + '../build',
+        path: path.join(__dirname, '../build'),
         publicPath: '/',
         filename: 'bundle-prd.js'
     },
