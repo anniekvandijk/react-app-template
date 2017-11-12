@@ -1,6 +1,6 @@
 module.exports = {
     entry: [
-        'webpack-dev-server/client?http://localhost:3001',
+        'webpack-dev-server/client?http://localhost:8080',
         'webpack/hot/only-dev-server',
         './src/index.js'
     ],
@@ -20,7 +20,7 @@ module.exports = {
         filename: 'bundle.js'
     },
     devServer: {
-        contentBase: './dist',
+        contentBase: './public',
         hot: true
     }
 };;
