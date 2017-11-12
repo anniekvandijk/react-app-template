@@ -23,12 +23,8 @@ module.exports = {
         extensions: ['*', '.js', '.jsx']
     },
     output: {
-        path: __dirname + '/public',
+        path: __dirname + '../build',
         publicPath: '/',
-        filename: 'bundle.js'
+        filename: 'bundle-prd.js'
     },
-    devServer: {
-        contentBase: './public',
-        hot: true
-    }
 };
