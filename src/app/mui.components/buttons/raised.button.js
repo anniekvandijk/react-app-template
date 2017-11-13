@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import FlatButton from 'material-ui/RaisedButton';
+import RaisedButton from 'material-ui/RaisedButton';
 
 class MuiRaisedButton extends Component {
     render() {
-        const { text, primary = true, secondary = false, disabled = false, onClick, classNames = '', ...props } = this.props;
+        const { text, disabled = false, onClick, classNames = '', ...props } = this.props;
         return (
             <RaisedButton
                 label={text}
-                className={`raised-button ${classNames.trim()}`}
-                primary={primary}
-                secondary={secondary}
+                className={`button raised-button ${classNames.trim()}`}
                 disabled={disabled}
                 onTouchTap={onClick}
                 {...props}
@@ -21,10 +19,8 @@ class MuiRaisedButton extends Component {
 
 MuiRaisedButton.propTypes = {
     text: PropTypes.string.isRequired,
-    primary: PropTypes.bool,
-    secondary: PropTypes.bool,
     disabled: PropTypes.bool,
-    onClick: PropTypes.func.isRequired,
+//    onClick: PropTypes.func.isRequired,
     classNames: PropTypes.string,
 };
 

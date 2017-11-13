@@ -4,13 +4,11 @@ import FlatButton from 'material-ui/FlatButton';
 
 class MuiFlatButton extends Component {
     render() {
-        const { text, primary = true, secondary = false, disabled = false, onClick, classNames = '', ...props } = this.props;
+        const { text, disabled = false, onClick, classNames = '', ...props } = this.props;
         return (
             <FlatButton
                 label={text}
-                className={`raised-button ${classNames.trim()}`}
-                primary={primary}
-                secondary={secondary}
+                className={`button flat-button ${classNames.trim()}`}
                 disabled={disabled}
                 onTouchTap={onClick}
                 {...props}
@@ -21,10 +19,8 @@ class MuiFlatButton extends Component {
 
 MuiFlatButton.propTypes = {
     text: PropTypes.string.isRequired,
-    primary: PropTypes.bool,
-    secondary: PropTypes.bool,
     disabled: PropTypes.bool,
-    onClick: PropTypes.func.isRequired,
+ //   onClick: PropTypes.func.isRequired,
     classNames: PropTypes.string,
 };
 
