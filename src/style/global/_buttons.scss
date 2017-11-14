@@ -1,5 +1,29 @@
 @import "colors";
 
+.flat-button {
+  color: $secondary-color !important;
+}
+
+.raised-button {
+
+  button {
+    position: relative;
+    overflow: visible !important;
+    background-color: $secondary-color !important;
+  }
+  &:hover {
+    button {
+      background-color: lighten($secondary-color, 20%) !important;
+
+      div {
+        div {
+          background-color: transparent !important;
+        }
+      }
+    }
+  }
+}
+
 .floating-action-button {
   position: fixed;
   bottom: 32px;

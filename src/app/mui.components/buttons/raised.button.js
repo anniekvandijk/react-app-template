@@ -7,6 +7,7 @@ class MuiRaisedButton extends Component {
         const { text, disabled = false, onClick, classNames = '', ...props } = this.props;
         return (
             <RaisedButton
+                primary
                 label={text}
                 className={`button raised-button ${classNames.trim()}`}
                 disabled={disabled}

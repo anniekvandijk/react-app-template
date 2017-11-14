@@ -7,6 +7,7 @@ class MuiFlatButton extends Component {
         const { text, disabled = false, onClick, classNames = '', ...props } = this.props;
         return (
             <FlatButton
+                primary
                 label={text}
                 className={`button flat-button ${classNames.trim()}`}
                 disabled={disabled}
