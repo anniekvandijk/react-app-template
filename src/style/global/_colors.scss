@@ -1,2 +1,35 @@
-$primary-color: #9C27B0;   // purple500
-$secondary-color: #B07E0E;
+// Basic colors
+$white: #FFFFFF;
+$grey900: #212121;
+
+// Primary MUI colors
+$red500: #F44336;
+$pink500: #E91E63;
+$purple500: #9C27B0;
+$deepPurple500: #673AB7;
+$indigo500: #3F51B5;
+$blue500: #2196F3;
+$green500: #4CAF50;
+$yellow500: #FFEB3B;
+$amber500: #FFC107;
+$orange500: #FF9800;
+$deepOrange500: #FF5722;
+$brown500: #795548;
+$blueGrey500: #607D8B;
+$grey500: #9E9E9E;
+
+// AlpacaColors
+$alpaca-multi-light: #fceedb;
+$alpaca-multi-dark: #4E342E;
+$alpaca-black: #000000;
+$alpaca-grey: #616161;
+$alpaca-brown: #4E342E;
+$alpaca-fawn: #a06c23;
+$alpaca-creme: #fceedb;
+$alpaca-white: #FFFFFF;
+
+// Site colors
+$primary-color: $purple500;
+$secondary-color: $deepOrange500;
+$tertiary-color: $green500;
+

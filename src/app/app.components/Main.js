@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import MuiFlatButton from "./buttons/flat.button";
-import MuiFloatingActionButton from "./buttons/round.add.button";
-import MuiRaisedButton from "./buttons/raised.button";
+import MuiFlatButton from "../mui.components/buttons/FlatButton";
+import MuiFloatingActionButton from "../mui.components/buttons/RoundAddButton";
+import MuiRaisedButton from "../mui.components/buttons/RaisedButton";
 
 class Main extends Component {
     render() {
