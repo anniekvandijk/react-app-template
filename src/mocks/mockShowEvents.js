@@ -6,30 +6,6 @@ export default process.env.NODE_ENV === 'production' ?
         date: '2016-07-27T00:00:00',
         location: 'Surhuisterveen',
         judge: 'Judge X',
-        showType:
-            {
-            showType: 'HalsterShow',
-            colorClasses: [
-                {
-                    color: 'white'
-                },
-                {
-                    color: 'black'
-                }
-            ],
-            species: [
-                {
-                    specie: 'huacaya'
-                }
-            ],
-            genders: [
-                {
-                    gender: 'male'
-                },
-                {
-                    gender: 'female'
-                }]
-            },
-        status: 'new'
+        showType: 'HalsterShow',
     }
     ]

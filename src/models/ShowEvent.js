@@ -1,6 +1,6 @@
-import ColorClass from "./ColorClass";
+import ColorClass from "../constants/ColorClass";
 import ShowEventStatus from "./ShowEventStatus";
-import ShowType from "./ShowType";
+import ShowType from "../constants/ShowType";
 
 export default class ShowEvent {
     constructor({id, name, date, location, judge, showType, colorClasses, status} = {}) {
