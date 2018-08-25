@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../style/main.scss';
+import './style/style.scss';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Header from "../app/app.components/Header";
 import Main from "../app/app.components/Main";
