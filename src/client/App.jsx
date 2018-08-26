@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import Header from "./components/app.components/Header";
-import Main from "./components/app.components/Main";
+import Header from './components/app.components/Header';
+import Main from './components/app.components/Main';
 
 class App extends Component {
   render() {
@@ -15,7 +15,5 @@ class App extends Component {
     );
   }
 }
-
-console.log(process.env.REACT_APP_TITLE);
 
 export default App;

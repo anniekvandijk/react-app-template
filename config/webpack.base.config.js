@@ -1,10 +1,10 @@
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-  entry: "./src/client/index.js",
+  entry: './src/client/index.js',
   resolve: {
-    extensions: [".js", ".jsx"]
+    extensions: ['.js', '.jsx']
   },
   module: {
     rules: [
@@ -18,8 +18,8 @@ module.exports = {
       {
         test: /\.scss$/,
         use: ExtractTextPlugin.extract({
-          fallback: "style-loader",
-          use: "css-loader!sass-loader",
+          fallback: 'style-loader',
+          use: 'css-loader!sass-loader'
         })
       }
     ]
@@ -28,14 +28,14 @@ module.exports = {
     port: 3000,
     open: true,
     proxy: {
-      "/": "http://localhost:3300"
+      '/': 'http://localhost:3300'
     }
   },
   plugins: [
-    new HtmlWebpackPlugin({ 
-      template: './src/client/index.html', 
-      filename: './index.html' 
+    new HtmlWebpackPlugin({
+      template: './src/client/index.html',
+      filename: './index.html'
     }),
     new ExtractTextPlugin('style.css')
   ]
-}
+};
