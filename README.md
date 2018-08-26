@@ -1,8 +1,10 @@
-# Testapp React
+# React template
 
-This is a React template.
+This is a React template for own use.
 
-React  
-Webpack  
-Babel
-Material UI
+- React  
+- Webpack  
+- Babel
+- Express
+- Material UI
+

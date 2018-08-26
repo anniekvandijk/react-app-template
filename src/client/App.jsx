@@ -16,4 +16,6 @@ class App extends Component {
   }
 }
 
+console.log(process.env.REACT_APP_TITLE);
+
 export default App;
