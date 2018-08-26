@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import './style/style.scss';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import Header from "../app/app.components/Header";
-import Main from "../app/app.components/Main";
+import Header from "./components/app.components/Header";
+import Main from "./components/app.components/Main";
 
 class App extends Component {
   render() {
