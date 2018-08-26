@@ -6,6 +6,7 @@
 
 # production
 /build
+/dist
 
 # misc
 .DS_Store
@@ -15,5 +16,6 @@ npm-debug.log*
 
 # Editor
 .idea
+.vscode
 
 package-lock.json
