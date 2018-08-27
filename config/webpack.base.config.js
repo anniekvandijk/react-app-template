@@ -2,8 +2,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-  entry: './src/client/index.js',
+  entry: './src/client/index.jsx',
   resolve: {
+    modules: [
+      'src',
+      'node_modules'
+    ],
     extensions: ['.js', '.jsx']
   },
   module: {
@@ -17,6 +21,7 @@ module.exports = {
       },
       {
         test: /\.scss$/,
+        exclude: /node_modules/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: 'css-loader!sass-loader'

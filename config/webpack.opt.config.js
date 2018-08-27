@@ -11,9 +11,9 @@ module.exports = {
           }
         }
       })
-    ],
+    ]
   },
   plugins: [
-    new OptimizeCssAssetsPlugin(),
-  ],
+    new OptimizeCssAssetsPlugin()
+  ]
 };

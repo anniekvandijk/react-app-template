@@ -1,5 +1,5 @@
 {
-  "extends": "airbnb-base",
+  "extends": "airbnb",
   "parser": "babel-eslint",
   "plugins": [
     "import",                                                                                                              
@@ -11,14 +11,8 @@
     "node": true
   },
   "rules": {
-    "react/jsx-uses-react": 1,
-    "react/jsx-uses-vars": 1,
-    "linebreak-style": "off",
-    "comma-dangle": ["error", "never"],
-    "id-length": 0,
-    "indent": [1, 2],
-    "no-console": 0,
-    "no-unused-vars": [1, {"vars": "local", "args": "none"}],
-    "strict": 0
+    "linebreak-style": 0,
+    "comma-dangle": [2, "never"],
+    "import/no-extraneous-dependencies": [2, {}]
   }
 }
