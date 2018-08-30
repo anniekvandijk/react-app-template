@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+
 module.exports = {
   entry: './src/client/index.jsx',
   resolve: {
@@ -10,14 +11,30 @@ module.exports = {
     ],
     extensions: ['.js', '.jsx']
   },
+  devServer: {
+    port: 3000,
+    open: true,
+    historyApiFallback: true,
+    proxy: {
+      '/': 'http://localhost:3300'
+    }
+  },
   module: {
     rules: [
       {
+        test: /\.(eot|ttf|woff|woff2)$/,
+        exclude: /node_modules/,
+        use: 'file-loader'
+      },
+      {
+        test: /\.(jpe?g|svg|gif|png)$/,
+        exclude: /node_modules/,
+        use: 'file-loader'
+      },
+      {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader'
-        }
+        use: 'babel-loader'
       },
       {
         test: /\.scss$/,
@@ -26,15 +43,13 @@ module.exports = {
           fallback: 'style-loader',
           use: 'css-loader!sass-loader'
         })
+      },
+      {
+        test: /\.css$/,
+        exclude: /node_modules/,
+        loader: 'style-loader!css-loader'
       }
     ]
-  },
-  devServer: {
-    port: 3000,
-    open: true,
-    proxy: {
-      '/': 'http://localhost:3300'
-    }
   },
   plugins: [
     new HtmlWebpackPlugin({

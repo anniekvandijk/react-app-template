@@ -13,6 +13,8 @@
   "rules": {
     "linebreak-style": 0,
     "comma-dangle": [2, "never"],
-    "import/no-extraneous-dependencies": [2, {}]
+    "import/no-extraneous-dependencies": [2, {}],
+    "react/prefer-es6-class": 1,
+    "react/prefer-stateless-function": 0
   }
 }

@@ -7,7 +7,7 @@ const app = express();
 // Point static path to dist
 app.use(express.static(path.join(__dirname, '..', 'dist')));
 
-app.get('/*', (req, res) => {
+app.get('*', (req, res) => {
   const routePath = path.join(__dirname, '..', '..', '..', 'dist/', 'index.html');
   res.sendFile(routePath);
 });
