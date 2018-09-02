@@ -5,11 +5,8 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import purple from '@material-ui/core/colors/purple';
 import pink from '@material-ui/core/colors/pink';
 import red from '@material-ui/core/colors/red';
-// Header
-import Header from './components/app.components/Header/Header';
-// Pages
+import Routes from './routes';
 import Home from './Pages/Home';
-import About from './Pages/About';
 
 const myTheme = createMuiTheme({
   palette: {
@@ -21,14 +18,12 @@ const myTheme = createMuiTheme({
   }
 });
 
-
 const App = () => (
   <MuiThemeProvider theme={myTheme}>
-    <Header />
+    {/* <Header /> */}
     <Switch>
-      <Route exact path="/" component={Home} />
-      <Route path="/home" component={Home} />
-      <Route path="/about" component={About} />
+      <Route exact path="/" name="Home" component={Home} />
+      { Routes.map(route => <Route key={route.name} name={route.name} path={route.path} component={route.component} />)}
     </Switch>
   </MuiThemeProvider>
 );

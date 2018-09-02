@@ -1,8 +1,12 @@
 import React from 'react';
+import Header from '../components/app.components/Main/Header';
 
-export default function About() {
+export default function About(props) {
+  const { pageName } = props;
   return (
-    <h1>Hello at the Aboutpage!</h1>
-  // <span className="text">Hier komt de text</span>
+    <div>
+      <Header pageName={pageName} />
+      <h1>Hello at the Aboutpage!</h1>
+    </div>
   );
 }
