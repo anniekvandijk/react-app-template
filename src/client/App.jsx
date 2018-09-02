@@ -3,15 +3,15 @@ import { Route, Switch } from 'react-router-dom';
 // Material-ui
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import purple from '@material-ui/core/colors/purple';
-import pink from '@material-ui/core/colors/pink';
 import red from '@material-ui/core/colors/red';
-import Routes from './routes';
-import Home from './Pages/Home';
+import blue from '@material-ui/core/colors/blue';
+import Routes from './Main/Routes';
+import Home from './Pages/Home/Home';
 
 const myTheme = createMuiTheme({
   palette: {
     primary: purple,
-    secondary: pink,
+    secondary: blue,
     error: red,
     contrastThreshold: 3,
     tonalOffset: 0.2
@@ -20,10 +20,16 @@ const myTheme = createMuiTheme({
 
 const App = () => (
   <MuiThemeProvider theme={myTheme}>
-    {/* <Header /> */}
     <Switch>
-      <Route exact path="/" name="Home" component={Home} />
-      { Routes.map(route => <Route key={route.name} name={route.name} path={route.path} component={route.component} />)}
+      <Route exact path="/" name="Home" render={() => <Home pageName="Home" />}/>
+      { Routes.map(route => 
+        <Route 
+          key={route.name} 
+          name={route.name} 
+          path={route.path} 
+          render={() => route.component}
+        />
+      )}
     </Switch>
   </MuiThemeProvider>
 );

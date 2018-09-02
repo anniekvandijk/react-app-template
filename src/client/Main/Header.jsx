@@ -18,7 +18,7 @@ function Header(props) {
     <AppBar position="absolute" className={classes.appBar}>
       <Toolbar>
         <Typography variant="title" color="inherit" noWrap>
-          {pageName}
+          Animundo > {pageName}
         </Typography>
       </Toolbar>
     </AppBar>
@@ -30,7 +30,7 @@ Header.propTypes = {
 };
 
 Header.defaultProps = {
-  pageName: 'Bla die bla'
+  pageName: 'Home'
 };
 
 export default withStyles(styles)(Header);
