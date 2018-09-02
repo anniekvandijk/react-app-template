@@ -11,7 +11,7 @@ const styles = theme => ({
     '&:focus': {
       backgroundColor: theme.palette.secondary.main,
       '& $primary, & $icon': {
-        color: theme.palette.common.white,
+        color: theme.palette.common.white
       }
     }
   },
@@ -24,7 +24,7 @@ function MenuItems(props) {
 
   return (
     <div>
-      { Routes.map(route => 
+      { Routes.map(route => (
         <div key={route.name}>
           <MenuItem className={classes.menuItem} component={Link} to={route.path}>
             <ListItemIcon className={classes.icon}>
@@ -32,7 +32,9 @@ function MenuItems(props) {
             </ListItemIcon>
             <ListItemText classes={{ primary: classes.primary }} inset primary={route.name} />
           </MenuItem>
-        </div>)}
+        </div>
+      ))
+      }
     </div>
   );
 }

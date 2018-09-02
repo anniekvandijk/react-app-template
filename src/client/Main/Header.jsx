@@ -18,7 +18,7 @@ function Header(props) {
     <AppBar position="absolute" className={classes.appBar}>
       <Toolbar>
         <Typography variant="title" color="inherit" noWrap>
-          Animundo > {pageName}
+          {`Animundo > ${pageName}`}
         </Typography>
       </Toolbar>
     </AppBar>

@@ -21,15 +21,15 @@ const myTheme = createMuiTheme({
 const App = () => (
   <MuiThemeProvider theme={myTheme}>
     <Switch>
-      <Route exact path="/" name="Home" render={() => <Home pageName="Home" />}/>
-      { Routes.map(route => 
-        <Route 
-          key={route.name} 
-          name={route.name} 
-          path={route.path} 
+      <Route exact path="/" name="Home" render={() => <Home pageName="Home" />} />
+      { Routes.map(route => (
+        <Route
+          key={route.name}
+          name={route.name}
+          path={route.path}
           render={() => route.component}
         />
-      )}
+      ))}
     </Switch>
   </MuiThemeProvider>
 );
