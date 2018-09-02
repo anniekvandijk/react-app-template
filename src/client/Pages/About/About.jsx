@@ -6,6 +6,9 @@ function About(props) {
   return (
     <PageWrapper pageName={pageName}>
       <h1>About page</h1>
+      <span>
+        Here there can be some text about the application.
+      </span>
     </PageWrapper>
   );
 }

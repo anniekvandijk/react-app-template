@@ -5,7 +5,7 @@ function Settings(props) {
   const { pageName } = props;
   return (
     <PageWrapper pageName={pageName}>
-      <h1>Setings</h1>
+      <h1>Settings</h1>
     </PageWrapper>
   );
 }

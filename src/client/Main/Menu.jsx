@@ -7,6 +7,9 @@ import MenuItems from './MenuItems';
 const drawerWidth = 240;
 
 const styles = theme => ({
+  menu: {
+    selectedMenuItemStyle: theme.palette.secondary.main
+  },
   drawerPaper: {
     position: 'relative',
     width: drawerWidth
@@ -24,7 +27,7 @@ function Menu(props) {
       }}
     >
       <div className={classes.toolbar} />
-      <MenuList>
+      <MenuList className={classes.menu}>
         <MenuItems />
       </MenuList>
     </Drawer>

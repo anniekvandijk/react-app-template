@@ -7,7 +7,7 @@ import Menu from '../Main/Menu';
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    height: 640,
+    height: '100%',
     zIndex: 1,
     overflow: 'hidden',
     position: 'relative',
@@ -17,7 +17,7 @@ const styles = theme => ({
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
     padding: theme.spacing.unit * 3,
-    minWidth: 0 // So the Typography noWrap works
+    minWidth: 0
   },
   toolbar: theme.mixins.toolbar
 
