@@ -1,15 +1,15 @@
-const express = require('express');
-const path = require('path');
-const http = require('http');
+import express from 'express';
+import path from 'path';
+import http from 'http';
 
 const app = express();
+const routePath = path.join(__dirname, '..', '..', '..', 'dist/', 'index.html');
 
 // Point static path to dist
 app.use(express.static(path.join(__dirname, '..', 'dist')));
 
 app.get('*', (req, res) => {
-  const routePath = path.join(__dirname, '..', '..', '..', 'dist/', 'index.html');
-  res.sendFile(routePath);
+  res.redirect('/').sendFile(routePath);
 });
 
 /** Get port from environment and store in Express. */
