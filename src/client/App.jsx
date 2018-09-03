@@ -1,12 +1,14 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-// Material-ui
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import purple from '@material-ui/core/colors/purple';
 import red from '@material-ui/core/colors/red';
 import blue from '@material-ui/core/colors/blue';
 import Routes from './Main/Routes';
 import Home from './Pages/Home/Home';
+import appReducer from '../redux/appReducer';
 
 const myTheme = createMuiTheme({
   palette: {
@@ -18,22 +20,31 @@ const myTheme = createMuiTheme({
   }
 });
 
+/* eslint-disable no-underscore-dangle */
+const store = createStore(
+  appReducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+/* eslint-enable */
+
 const App = () => (
-  <BrowserRouter>
-    <MuiThemeProvider theme={myTheme}>
-      <Switch>
-        <Route exact path="/" name="Home" render={() => <Home pageName="Home" />} />
-        { Routes.map(route => (
-          <Route
-            key={route.name}
-            name={route.name}
-            path={route.path}
-            render={() => route.component}
-          />
-        ))}
-      </Switch>
-    </MuiThemeProvider>
-  </BrowserRouter>
+  <Provider store={store}>
+    <BrowserRouter>
+      <MuiThemeProvider theme={myTheme}>
+        <Switch>
+          <Route exact path="/" name="Home" render={() => <Home pageName="Home" />} />
+          { Routes.map(route => (
+            <Route
+              key={route.name}
+              name={route.name}
+              path={route.path}
+              render={() => route.component}
+            />
+          ))}
+        </Switch>
+      </MuiThemeProvider>
+    </BrowserRouter>
+  </Provider>
 );
 
 export default App;
