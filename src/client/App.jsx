@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 // Material-ui
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import purple from '@material-ui/core/colors/purple';
@@ -19,19 +19,21 @@ const myTheme = createMuiTheme({
 });
 
 const App = () => (
-  <MuiThemeProvider theme={myTheme}>
-    <Switch>
-      <Route exact path="/" name="Home" render={() => <Home pageName="Home" />} />
-      { Routes.map(route => (
-        <Route
-          key={route.name}
-          name={route.name}
-          path={route.path}
-          render={() => route.component}
-        />
-      ))}
-    </Switch>
-  </MuiThemeProvider>
+  <BrowserRouter>
+    <MuiThemeProvider theme={myTheme}>
+      <Switch>
+        <Route exact path="/" name="Home" render={() => <Home pageName="Home" />} />
+        { Routes.map(route => (
+          <Route
+            key={route.name}
+            name={route.name}
+            path={route.path}
+            render={() => route.component}
+          />
+        ))}
+      </Switch>
+    </MuiThemeProvider>
+  </BrowserRouter>
 );
 
 export default App;

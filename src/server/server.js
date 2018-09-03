@@ -9,7 +9,8 @@ const routePath = path.join(__dirname, '..', '..', '..', 'dist/', 'index.html');
 app.use(express.static(path.join(__dirname, '..', 'dist')));
 
 app.get('*', (req, res) => {
-  res.redirect('/').sendFile(routePath);
+  res.sendFile(routePath);
+  res.redirect('/');
 });
 
 /** Get port from environment and store in Express. */
