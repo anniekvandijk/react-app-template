@@ -20,7 +20,7 @@ class Counter extends React.Component {
           <button onClick={this.increment}>+</button>
         </div>
       </div>
-    )
+    );
   }
 }
 

@@ -1,4 +1,4 @@
-const initialState = {
+ const initialState = {
   count: 0
 };
 

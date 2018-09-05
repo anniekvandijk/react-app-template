@@ -1,4 +1,3 @@
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
@@ -12,8 +11,5 @@ module.exports = {
         }
       })
     ]
-  },
-  plugins: [
-    new OptimizeCssAssetsPlugin()
-  ]
+  }
 };
