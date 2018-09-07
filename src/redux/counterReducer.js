@@ -1,8 +1,8 @@
- const initialState = {
+const initialState = {
   count: 0
 };
 
-function appReducer(state = initialState, action) {
+function counterReducer(state = initialState, action) {
   switch (action.type) {
     case 'INCREMENT':
       return {
@@ -17,4 +17,4 @@ function appReducer(state = initialState, action) {
   }
 }
 
-export default appReducer;
+export default counterReducer;

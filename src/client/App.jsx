@@ -8,7 +8,8 @@ import red from '@material-ui/core/colors/red';
 import blue from '@material-ui/core/colors/blue';
 import Routes from './Main/Routes';
 import Home from './Pages/Home/Home';
-import appReducer from '../redux/appReducer';
+import rootReducer from '../redux/rootReducer';
+import appReducer from '../redux/counterReducer';
 
 const myTheme = createMuiTheme({
   palette: {
@@ -22,7 +23,7 @@ const myTheme = createMuiTheme({
 
 /* eslint-disable no-underscore-dangle */
 const store = createStore(
-  appReducer,
+  rootReducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 /* eslint-enable */
