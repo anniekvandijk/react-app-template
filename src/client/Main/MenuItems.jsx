@@ -1,10 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import MenuItem from '@material-ui/core/MenuItem';
-import Routes from './Routes';
+import HelpIcon from '@material-ui/icons/Help';
+import HomeIcon from '@material-ui/icons/Home';
+import SettingsIcon from '@material-ui/icons/Settings';
 
 const styles = theme => ({
   menuItem: {
@@ -19,24 +22,40 @@ const styles = theme => ({
   icon: {}
 });
 
+const Items = [{
+  name: 'Home',
+  path: '/home',
+  icon: <HomeIcon />
+},
+{
+  name: 'About',
+  path: '/about',
+  icon: <HelpIcon />
+},
+{
+  name: 'Settings',
+  path: '/settings',
+  icon: <SettingsIcon />
+}];
+
 function MenuItems(props) {
   const { classes } = props;
-
   return (
-    <div>
-      { Routes.map(route => (
-        <div key={route.name}>
-          <MenuItem className={classes.menuItem} component={Link} to={route.path}>
-            <ListItemIcon className={classes.icon}>
-              {route.icon}
-            </ListItemIcon>
-            <ListItemText classes={{ primary: classes.primary }} inset primary={route.name} />
-          </MenuItem>
-        </div>
-      ))
-      }
-    </div>
+    Items.map(item => (
+      <div key={item.name}>
+        <MenuItem className={classes.menuItem} component={Link} to={item.path}>
+          <ListItemIcon className={classes.icon}>
+            {item.icon}
+          </ListItemIcon>
+          <ListItemText classes={{ primary: classes.primary }} inset primary={item.name} />
+        </MenuItem>
+      </div>
+    ))
   );
 }
+
+MenuItems.propTypes = {
+  classes: PropTypes.func.isRequired
+};
 
 export default withStyles(styles)(MenuItems);

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Header from '../Main/Header';
@@ -24,10 +25,10 @@ const styles = theme => ({
 });
 
 function PageWrapper(props) {
-  const { classes, pageName, children } = props;
+  const { classes, children } = props;
   return (
     <div className={classes.root}>
-      <Header pageName={pageName} />
+      <Header />
       <Menu />
       <main className={classes.content}>
         <div className={classes.toolbar} />
@@ -38,4 +39,10 @@ function PageWrapper(props) {
     </div>
   );
 }
+
+PageWrapper.propTypes = {
+  classes: PropTypes.func.isRequired,
+  children: PropTypes.arrayOf.isRequired
+};
+
 export default withStyles(styles)(PageWrapper);

@@ -1,10 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { decrement, increment } from '../../../redux/counterActions';
 
-class Counter extends React.Component {
+class Counter extends React.PureComponent {
   render() {
-    const { decrement: minus, increment: plus, count: number } = this.props;
+    const {
+      decrement: minus,
+      increment: plus,
+      count: number
+    } = this.props;
     return (
       <div>
         <h2>Counter</h2>
@@ -17,6 +22,12 @@ class Counter extends React.Component {
     );
   }
 }
+
+Counter.propTypes = {
+  decrement: PropTypes.func.isRequired,
+  increment: PropTypes.func.isRequired,
+  count: PropTypes.func.isRequired
+};
 
 const mapStateToProps = state => ({
   count: state.counter.count

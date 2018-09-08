@@ -2,10 +2,9 @@ import React from 'react';
 import PageWrapper from '../PageWrapper';
 import Counter from '../Test/Counter';
 
-function Home(props) {
-  const { pageName } = props;
+function Home() {
   return (
-    <PageWrapper pageName={pageName}>
+    <PageWrapper>
       <h1>Homepage</h1>
       <span>
         <Counter />

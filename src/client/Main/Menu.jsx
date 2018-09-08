@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import MenuList from '@material-ui/core/MenuList';
@@ -33,5 +34,9 @@ function Menu(props) {
     </Drawer>
   );
 }
+
+Menu.propTypes = {
+  classes: PropTypes.func.isRequired
+};
 
 export default withStyles(styles)(Menu);

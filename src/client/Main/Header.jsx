@@ -13,7 +13,6 @@ const styles = theme => ({
 
 function Header(props) {
   const { classes, pageName } = props;
-
   return (
     <AppBar position="absolute" className={classes.appBar}>
       <Toolbar>
@@ -26,6 +25,7 @@ function Header(props) {
 }
 
 Header.propTypes = {
+  classes: PropTypes.func.isRequired,
   pageName: PropTypes.string
 };
 

@@ -1,10 +1,9 @@
 import React from 'react';
 import PageWrapper from '../PageWrapper';
 
-function Settings(props) {
-  const { pageName } = props;
+function Settings() {
   return (
-    <PageWrapper pageName={pageName}>
+    <PageWrapper>
       <h1>Settings</h1>
     </PageWrapper>
   );
