@@ -26,7 +26,7 @@ class Counter extends React.PureComponent {
 Counter.propTypes = {
   decrement: PropTypes.func.isRequired,
   increment: PropTypes.func.isRequired,
-  count: PropTypes.func.isRequired
+  count: PropTypes.number.isRequired
 };
 
 const mapStateToProps = state => ({

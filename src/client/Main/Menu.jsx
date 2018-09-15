@@ -1,42 +1,104 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import MenuList from '@material-ui/core/MenuList';
-import MenuItems from './MenuItems';
+import { Link } from 'react-router-dom';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import MenuItem from '@material-ui/core/MenuItem';
+import HelpIcon from '@material-ui/icons/Help';
+import HomeIcon from '@material-ui/icons/Home';
+import SettingsIcon from '@material-ui/icons/Settings';
+import { setSelectedMenuItem } from '../../redux/actions';
 
 const drawerWidth = 240;
 
 const styles = theme => ({
-  menu: {
-    selectedMenuItemStyle: theme.palette.secondary.main
-  },
   drawerPaper: {
     position: 'relative',
     width: drawerWidth
   },
-  toolbar: theme.mixins.toolbar
+  toolbar: theme.mixins.toolbar,
+  menuItem: {
+    '&:focus': {
+      backgroundColor: theme.palette.secondary.main,
+      '& $primary, & $icon': {
+        color: theme.palette.common.white
+      }
+    }
+  },
+  primary: {},
+  icon: {}
 });
 
-function Menu(props) {
-  const { classes } = props;
-  return (
-    <Drawer
-      variant="permanent"
-      classes={{
-        paper: classes.drawerPaper
-      }}
-    >
-      <div className={classes.toolbar} />
-      <MenuList className={classes.menu}>
-        <MenuItems />
-      </MenuList>
-    </Drawer>
-  );
+class Menu extends React.PureComponent {
+  render() {
+    const { classes, selectedMenuItem: selectedItem, setSelectedMenuItem: setSelected } = this.props;
+    return (
+      <Drawer
+        variant="permanent"
+        classes={{
+          paper: classes.drawerPaper
+        }}
+      >
+        <div className={classes.toolbar} />
+        <MenuList className={classes.menu}>
+          <MenuItem
+            className={classes.menuItem}
+            component={Link}
+            to="/home"
+            selected={selectedItem === 0}
+            onClick={setSelected(0)}
+          >
+            <ListItemIcon className={classes.icon}>
+              <HomeIcon />
+            </ListItemIcon>
+            <ListItemText classes={{ primary: classes.primary }} inset primary="Home" />
+          </MenuItem>
+          <MenuItem
+            className={classes.menuItem}
+            component={Link}
+            to="/about"
+            selected={selectedItem === 1}
+            onClick={setSelected(1)}
+          >
+            <ListItemIcon className={classes.icon}>
+              <HelpIcon />
+            </ListItemIcon>
+            <ListItemText classes={{ primary: classes.primary }} inset primary="About" />
+          </MenuItem>
+          <MenuItem
+            className={classes.menuItem}
+            component={Link}
+            to="/settings"
+            selected={selectedItem === 2}
+            onClick={setSelected(2)}
+          >
+            <ListItemIcon className={classes.icon}>
+              <SettingsIcon />
+            </ListItemIcon>
+            <ListItemText classes={{ primary: classes.primary }} inset primary="Settings" />
+          </MenuItem>
+        </MenuList>
+      </Drawer>
+    );
+  }
 }
 
 Menu.propTypes = {
-  classes: PropTypes.func.isRequired
+  // classes: PropTypes.object.isRequired,
+  // selectedMenuItem: PropTypes.number.isRequired,
+  // setSelectedMenuItem: PropTypes.object
 };
 
-export default withStyles(styles)(Menu);
+const mapStateToProps = state => ({
+  selectedMenuItem: state.application.selectedMenuItem
+});
+
+const mapDispatchToProps = dispatch => ({
+  setSelectedMenuItem: index => dispatch(setSelectedMenuItem(index))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Menu));

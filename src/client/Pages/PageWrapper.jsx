@@ -40,9 +40,9 @@ function PageWrapper(props) {
   );
 }
 
-PageWrapper.propTypes = {
-  classes: PropTypes.func.isRequired,
-  children: PropTypes.arrayOf.isRequired
-};
+// PageWrapper.propTypes = {
+//   classes: PropTypes.func.isRequired,
+//   children: PropTypes.arrayOf.isRequired
+// };
 
 export default withStyles(styles)(PageWrapper);

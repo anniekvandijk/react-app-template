@@ -7,10 +7,10 @@ import Settings from '../Pages/Settings/Settings';
 function Routes() {
   return (
     <div>
-      <Route exact path="/" render={() => <Home pageName="Home" />} />
-      <Route exact path="/home" render={() => <Home pageName="Home" />} />
-      <Route exact path="/about" render={() => <About pageName="Home" />} />
-      <Route exact path="/settings" render={() => <Settings pageName="Home" />} />
+      <Route exact path="/" component={Home} />
+      <Route exact path="/home" component={Home} />
+      <Route exact path="/about" component={About} />
+      <Route exact path="/settings" component={Settings} />
     </div>
   );
 }
