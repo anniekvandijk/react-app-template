@@ -3,19 +3,25 @@ import { BrowserRouter, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import purple from '@material-ui/core/colors/purple';
 import red from '@material-ui/core/colors/red';
-import blue from '@material-ui/core/colors/blue';
 import Routes from './Main/Routes';
 import rootReducer from '../redux/rootReducer';
 
 const myTheme = createMuiTheme({
   palette: {
-    primary: purple,
-    secondary: blue,
-    error: red,
-    contrastThreshold: 3,
-    tonalOffset: 0.2
+    primary: {
+      light: '#8b6b61',
+      main: '#5d4037',
+      dark: '#321911',
+      contrastText: '#fff'
+    },
+    secondary: {
+      light: '#d2cd55',
+      main: '#9e9c22',
+      dark: '#6c6e00',
+      contrastText: '#000'
+    },
+    error: red
   }
 });
 
