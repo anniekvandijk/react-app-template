@@ -23,7 +23,7 @@ const styles = theme => ({
   toolbar: theme.mixins.toolbar,
   menuItem: {
     '&:focus': {
-      backgroundColor: theme.palette.secondary.main,
+      // backgroundColor: theme.palette.secondary.main,
       '& $primary, & $icon': {
         color: theme.palette.common.white
       }
@@ -35,7 +35,7 @@ const styles = theme => ({
 
 class Menu extends React.PureComponent {
   render() {
-    const { classes, selectedMenuItem: selectedItem, setSelectedMenuItem: setSelected } = this.props;
+    const { classes, selectedMenuItem: selectedItem, setSelected } = this.props;
     return (
       <Drawer
         variant="permanent"
@@ -50,7 +50,7 @@ class Menu extends React.PureComponent {
             component={Link}
             to="/home"
             selected={selectedItem === 0}
-            onClick={setSelected(0)}
+            onClick={() => setSelected(0)}
           >
             <ListItemIcon className={classes.icon}>
               <HomeIcon />
@@ -62,7 +62,7 @@ class Menu extends React.PureComponent {
             component={Link}
             to="/about"
             selected={selectedItem === 1}
-            onClick={setSelected(1)}
+            onClick={() => setSelected(1)}
           >
             <ListItemIcon className={classes.icon}>
               <HelpIcon />
@@ -74,7 +74,7 @@ class Menu extends React.PureComponent {
             component={Link}
             to="/settings"
             selected={selectedItem === 2}
-            onClick={setSelected(2)}
+            onClick={() => setSelected(2)}
           >
             <ListItemIcon className={classes.icon}>
               <SettingsIcon />
@@ -88,9 +88,13 @@ class Menu extends React.PureComponent {
 }
 
 Menu.propTypes = {
-  // classes: PropTypes.object.isRequired,
-  // selectedMenuItem: PropTypes.number.isRequired,
-  // setSelectedMenuItem: PropTypes.object
+  classes: PropTypes.object.isRequired,
+  selectedMenuItem: PropTypes.number.isRequired,
+  setSelected: PropTypes.func
+};
+
+Menu.defaultProps = {
+  setSelected: 0
 };
 
 const mapStateToProps = state => ({
@@ -98,7 +102,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  setSelectedMenuItem: index => dispatch(setSelectedMenuItem(index))
+  setSelected: index => dispatch(setSelectedMenuItem(index))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Menu));

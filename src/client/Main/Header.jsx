@@ -25,7 +25,7 @@ function Header(props) {
 }
 
 Header.propTypes = {
-  classes: PropTypes.func.isRequired,
+  classes: PropTypes.object.isRequired,
   pageName: PropTypes.string
 };
 

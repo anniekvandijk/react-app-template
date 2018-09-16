@@ -6,16 +6,16 @@ const initialState = {
 };
 
 function appReducer(state = initialState, action) {
-  console.log(state);
   switch (action.type) {
     case actions.actionType.SET_SELECTED_MENU_ITEM:
-      return {
-        ...state
-      };
+    { const selectedMenuItem = action.payload;
+      return { ...state, selectedMenuItem };
+    }
     case actions.actionType.SET_HEADER_TITLE:
-      return {
-        ...state
-      };
+    {
+      const headerText = action.payload;
+      return { ...state, headerText };
+    }
     default:
       return state;
   }
