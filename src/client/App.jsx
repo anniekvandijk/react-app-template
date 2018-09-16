@@ -26,18 +26,16 @@ const store = createStore(
 );
 /* eslint-enable */
 
-function App() {
-  return (
-    <Provider store={store}>
-      <BrowserRouter>
-        <MuiThemeProvider theme={myTheme}>
-          <Switch>
-            <Routes />
-          </Switch>
-        </MuiThemeProvider>
-      </BrowserRouter>
-    </Provider>
-  );
-}
+const App = () => (
+  <Provider store={store}>
+    <BrowserRouter>
+      <MuiThemeProvider theme={myTheme}>
+        <Switch>
+          <Routes />
+        </Switch>
+      </MuiThemeProvider>
+    </BrowserRouter>
+  </Provider>
+);
 
 export default App;
