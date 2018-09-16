@@ -8,6 +8,7 @@ This is a React template for own use.
 - Express
 - Material UI (because I thik this looks very cool!)
 - Eslint
+- Redux
 
 Dev mode has two 'hot' servers
 - Express with nodemon for backend
