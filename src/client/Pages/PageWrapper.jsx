@@ -24,7 +24,7 @@ const styles = theme => ({
 
 });
 
-function PageWrapper(props) {
+const PageWrapper = (props) => {
   const { classes, children } = props;
   return (
     <div className={classes.root}>
@@ -38,11 +38,11 @@ function PageWrapper(props) {
       </main>
     </div>
   );
-}
+};
 
-// PageWrapper.propTypes = {
-//   classes: PropTypes.func.isRequired,
-//   children: PropTypes.arrayOf.isRequired
-// };
+PageWrapper.propTypes = {
+  classes: PropTypes.object.isRequired,
+  // children: PropTypes.object.isRequired
+};
 
 export default withStyles(styles)(PageWrapper);
