@@ -20,17 +20,7 @@ const styles = theme => ({
     position: 'relative',
     width: drawerWidth
   },
-  toolbar: theme.mixins.toolbar,
-  menuItem: {
-    '&:focus': {
-      // backgroundColor: theme.palette.secondary.main,
-      '& $primary, & $icon': {
-        color: theme.palette.common.white
-      }
-    }
-  },
-  primary: {},
-  icon: {}
+  toolbar: theme.mixins.toolbar
 });
 
 class Menu extends React.PureComponent {
@@ -44,42 +34,39 @@ class Menu extends React.PureComponent {
         }}
       >
         <div className={classes.toolbar} />
-        <MenuList className={classes.menu}>
+        <MenuList>
           <MenuItem
-            className={classes.menuItem}
             component={Link}
             to="/home"
             selected={selectedItem === 0}
-            onClick={() => setSelected(0)}
+            onClick={() => setSelected(0, 'Home')}
           >
-            <ListItemIcon className={classes.icon}>
+            <ListItemIcon>
               <HomeIcon />
             </ListItemIcon>
-            <ListItemText classes={{ primary: classes.primary }} inset primary="Home" />
+            <ListItemText inset primary="Home" />
           </MenuItem>
           <MenuItem
-            className={classes.menuItem}
             component={Link}
             to="/about"
             selected={selectedItem === 1}
-            onClick={() => setSelected(1)}
+            onClick={() => setSelected(1, 'About')}
           >
-            <ListItemIcon className={classes.icon}>
+            <ListItemIcon>
               <HelpIcon />
             </ListItemIcon>
-            <ListItemText classes={{ primary: classes.primary }} inset primary="About" />
+            <ListItemText inset primary="About" />
           </MenuItem>
           <MenuItem
-            className={classes.menuItem}
             component={Link}
             to="/settings"
             selected={selectedItem === 2}
-            onClick={() => setSelected(2)}
+            onClick={() => setSelected(2, 'Settings')}
           >
-            <ListItemIcon className={classes.icon}>
+            <ListItemIcon>
               <SettingsIcon />
             </ListItemIcon>
-            <ListItemText classes={{ primary: classes.primary }} inset primary="Settings" />
+            <ListItemText inset primary="Settings" />
           </MenuItem>
         </MenuList>
       </Drawer>
@@ -98,11 +85,11 @@ Menu.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  selectedMenuItem: state.application.selectedMenuItem
+  selectedMenuItem: state.application.menu.selectedMenuItem
 });
 
 const mapDispatchToProps = dispatch => ({
-  setSelected: index => dispatch(setSelectedMenuItem(index))
+  setSelected: (index, header) => dispatch(setSelectedMenuItem(index, header))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Menu));

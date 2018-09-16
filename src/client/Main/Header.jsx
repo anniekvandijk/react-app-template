@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -11,26 +12,28 @@ const styles = theme => ({
   }
 });
 
-function Header(props) {
-  const { classes, pageName } = props;
-  return (
-    <AppBar position="absolute" className={classes.appBar}>
-      <Toolbar>
-        <Typography variant="title" color="inherit" noWrap>
-          {`Animundo > ${pageName}`}
-        </Typography>
-      </Toolbar>
-    </AppBar>
-  );
+class Header extends React.PureComponent {
+  render() {
+    const { classes, headerText: header } = this.props;
+    return (
+      <AppBar position="absolute" className={classes.appBar}>
+        <Toolbar>
+          <Typography variant="title" color="inherit" noWrap>
+            {`Animundo > ${header}`}
+          </Typography>
+        </Toolbar>
+      </AppBar>
+    );
+  }
 }
 
 Header.propTypes = {
   classes: PropTypes.object.isRequired,
-  pageName: PropTypes.string
+  headerText: PropTypes.string.isRequired
 };
 
-Header.defaultProps = {
-  pageName: 'Home'
-};
+const mapStateToProps = state => ({
+  headerText: state.application.menu.headerText
+});
 
-export default withStyles(styles)(Header);
+export default connect(mapStateToProps)(withStyles(styles)(Header));
