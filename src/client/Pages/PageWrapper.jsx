@@ -42,7 +42,10 @@ const PageWrapper = (props) => {
 
 PageWrapper.propTypes = {
   classes: PropTypes.object.isRequired,
-  // children: PropTypes.object.isRequired
+  children: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.array
+  ]).isRequired
 };
 
 export default withStyles(styles)(PageWrapper);
