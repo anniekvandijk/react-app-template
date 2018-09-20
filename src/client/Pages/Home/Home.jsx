@@ -3,9 +3,9 @@ import PageWrapper from '../PageWrapper';
 import FormContainer from '../../components/Forms/FormContainer';
 
 const Home = () => (
-  <PageWrapper>
+  <PageWrapper id="pagewrapper">
     <h1>Homepage</h1>
-    <FormContainer />
+    <FormContainer id="formcontainer" />
   </PageWrapper>
 );
 

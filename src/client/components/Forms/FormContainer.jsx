@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { reduxForm } from 'redux-form';
 import FormComponent from './FormComponent';
 
-export const FormContainer = ({ handleSubmit }) => {
+const FormContainer = ({ handleSubmit }) => {
   const submitForm = (formValues) => {
     console.log('submitting Form: ', formValues);
   };
@@ -16,11 +16,11 @@ export const FormContainer = ({ handleSubmit }) => {
 };
 
 const formConfiguration = {
-  form: 'my-very-own-form'
+  form: 'My test form'
 };
 
 FormContainer.propTypes = {
-  handleSubmit: PropTypes.func
+  handleSubmit: PropTypes.func.isRequired
 };
 
 export default reduxForm(formConfiguration)(FormContainer);
