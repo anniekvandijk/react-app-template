@@ -1,11 +1,13 @@
 import React from 'react';
 import PageWrapper from '../PageWrapper';
-import FormContainer from '../../components/Forms/FormContainer';
+import FormContainer from '../../Forms/TestForm/FormContainer';
+import SimpleTable from '../../Forms/TestForm/FormTable';
 
 const Home = () => (
-  <PageWrapper id="pagewrapper">
+  <PageWrapper>
     <h1>Homepage</h1>
-    <FormContainer id="formcontainer" />
+    <FormContainer />
+    <SimpleTable />
   </PageWrapper>
 );
 
