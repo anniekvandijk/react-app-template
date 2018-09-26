@@ -8,7 +8,11 @@ const routePath = path.join(__dirname, '..', '..', '..', 'dist/', 'index.html');
 // Point static path to dist
 app.use(express.static(path.join(__dirname, '..', 'dist')));
 
-app.use('*', (req, res) => {
+app.use('/mockdata', (req, res) => {
+  res.sendFile(path.join(__dirname, './mock.json'));
+});
+
+app.use('/*', (req, res) => {
   res.sendFile(routePath);
 });
 

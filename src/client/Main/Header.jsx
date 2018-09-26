@@ -33,7 +33,7 @@ Header.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  headerText: state.application.menu.headerText
+  headerText: state.navigation.menu.headerText
 });
 
 export default connect(mapStateToProps)(withStyles(styles)(Header));

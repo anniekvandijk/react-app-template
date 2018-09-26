@@ -1,11 +1,13 @@
 import React from 'react';
 import { BrowserRouter, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import red from '@material-ui/core/colors/red';
 import Routes from './Main/Routes';
 import rootReducer from '../redux/rootReducer';
+import { loadMock } from '../redux/mockReducer';
 
 const myTheme = createMuiTheme({
   palette: {
@@ -28,9 +30,14 @@ const myTheme = createMuiTheme({
 /* eslint-disable no-underscore-dangle */
 const store = createStore(
   rootReducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  compose(
+    applyMiddleware(thunk),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  )
 );
 /* eslint-enable */
+
+store.dispatch(loadMock());
 
 const App = () => (
   <Provider store={store}>

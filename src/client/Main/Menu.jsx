@@ -11,7 +11,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import HelpIcon from '@material-ui/icons/Help';
 import HomeIcon from '@material-ui/icons/Home';
 import SettingsIcon from '@material-ui/icons/Settings';
-import { setSelectedMenuItem } from '../../redux/actions';
+import { setSelectedMenuItem } from '../../redux/navigationReducer';
 
 const drawerWidth = 240;
 
@@ -85,7 +85,7 @@ Menu.defaultProps = {
 };
 
 const mapStateToProps = state => ({
-  selectedMenuItem: state.application.menu.selectedMenuItem
+  selectedMenuItem: state.navigation.menu.selectedMenuItem
 });
 
 const mapDispatchToProps = dispatch => ({

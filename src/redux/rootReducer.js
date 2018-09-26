@@ -1,9 +1,12 @@
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
-import appReducer from './appReducer';
+import { navigationReducer } from './navigationReducer';
+import { mockReducer } from './mockReducer';
 
 const rootReducer = combineReducers({
-  application: appReducer,
-  form: formReducer
+  navigation: navigationReducer,
+  form: formReducer,
+  mock: mockReducer,
+  test: mockReducer
 });
 export default rootReducer;
