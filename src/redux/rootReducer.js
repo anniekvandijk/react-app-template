@@ -6,7 +6,7 @@ import { mockReducer } from './mockReducer';
 const rootReducer = combineReducers({
   navigation: navigationReducer,
   form: formReducer,
-  mock: mockReducer,
-  test: mockReducer
+  data: mockReducer
 });
+
 export default rootReducer;

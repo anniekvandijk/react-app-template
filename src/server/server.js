@@ -12,6 +12,10 @@ app.use('/mockdata', (req, res) => {
   res.sendFile(path.join(__dirname, './mock.json'));
 });
 
+app.use('/mockdata/add', (req, res) => {
+  res.send({ response: 'hi' });
+});
+
 app.use('/*', (req, res) => {
   res.sendFile(routePath);
 });

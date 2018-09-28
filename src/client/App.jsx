@@ -7,7 +7,6 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import red from '@material-ui/core/colors/red';
 import Routes from './Main/Routes';
 import rootReducer from '../redux/rootReducer';
-import { loadMock } from '../redux/mockReducer';
 
 const myTheme = createMuiTheme({
   palette: {
@@ -36,8 +35,6 @@ const store = createStore(
   )
 );
 /* eslint-enable */
-
-store.dispatch(loadMock());
 
 const App = () => (
   <Provider store={store}>

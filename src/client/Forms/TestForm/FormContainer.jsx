@@ -3,15 +3,20 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import FormComponent from './FormComponent';
-import { saveMock } from '../../../redux/mockReducer';
+import { saveState, createData } from '../../../redux/mockReducer';
 
 const FormContainer = (props) => {
   const {
-    handleSubmit, pristine, reset, submitting, saveForm
+    handleSubmit, pristine, reset, submitting, state, save
   } = props;
   const submitForm = (formValues) => {
-    console.log('submitting Form: ', formValues);
-    saveForm(formValues);
+    state(formValues);
+    save({
+      persons: {
+        firstName: formValues.firstName,
+        hobbies: formValues.hobbies
+      }
+    });
     reset();
   };
   return (
@@ -30,7 +35,8 @@ FormContainer.propTypes = {
   pristine: PropTypes.bool,
   reset: PropTypes.func.isRequired,
   submitting: PropTypes.bool,
-  saveForm: PropTypes.func.isRequired
+  state: PropTypes.func.isRequired,
+  save: PropTypes.func.isRequired
 };
 
 FormContainer.defaultProps = {
@@ -39,7 +45,8 @@ FormContainer.defaultProps = {
 };
 
 const mapDispatchToProps = dispatch => ({
-  saveForm: formValues => dispatch(saveMock(formValues))
+  state: formValues => dispatch(saveState(formValues)),
+  save: body => dispatch(createData('/mockdata/add', body))
 });
 
 export default connect(null, mapDispatchToProps)(reduxForm({ form: 'MyForm' })(FormContainer));

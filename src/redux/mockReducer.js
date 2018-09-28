@@ -2,22 +2,30 @@ import { createAction } from 'redux-actions';
 import Api from '../client/api/Api';
 
 const initialState = {
-  persons: []
+  data: []
 };
 
 const actionType = {
   API_SUCCESS: 'API_SUCCESS',
   API_ERROR: 'API_ERROR',
-  SAVE_MOCK: 'SAVE_MOCK'
+  SAVE_STATE: 'SAVE_STATE'
 };
 
 const apiSuccess = createAction(actionType.API_SUCCESS);
 const apiError = createAction(actionType.API_ERROR);
-const saveMock = createAction(actionType.SAVE_MOCK);
+const saveState = createAction(actionType.SAVE_STATE);
 
-function loadMock() {
+function readData(path) {
   return function action(dispatch) {
-    return Api.get('/mockdata')
+    return Api.get(path)
+      .then(data => dispatch(apiSuccess(data)))
+      .catch(error => dispatch(apiError(error)));
+  };
+}
+
+function createData(path, body) {
+  return function action(dispatch) {
+    return Api.post(path, body)
       .then(data => dispatch(apiSuccess(data)))
       .catch(error => dispatch(apiError(error)));
   };
@@ -25,9 +33,11 @@ function loadMock() {
 
 const mockReducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionType.SAVE_MOCK:
+    case actionType.SAVE_STATE:
       return { persons: Object.assign(state.persons.concat([action.payload])) };
     case actionType.API_SUCCESS:
+      console.log('returned data');
+      console.log(action.payload);
       return action.payload;
     case actionType.API_ERROR:
       return action.payload;
@@ -36,4 +46,9 @@ const mockReducer = (state = initialState, action) => {
   }
 };
 
-export { mockReducer, loadMock, saveMock };
+export {
+  mockReducer,
+  readData,
+  createData,
+  saveState
+};
