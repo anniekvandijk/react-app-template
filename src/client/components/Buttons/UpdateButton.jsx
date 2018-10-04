@@ -9,28 +9,26 @@ const styles = theme => ({
   }
 });
 
-const ResetButton = (props) => {
+const UpdateButton = (props) => {
   const {
-    classes, reset, pristine, submitting
+    classes, recordUpdate
   } = props;
   return (
     <Button
-      id="resetbutton"
-      color="secondary"
-      disabled={pristine || submitting}
+      id="updatebutton"
+      color="primary"
+      variant="contained"
       className={classes.button}
       type="button"
-      onClick={reset}
-    >Cancel
+      onClick={recordUpdate}
+    >Edit
     </Button>
   );
 };
 
-ResetButton.propTypes = {
+UpdateButton.propTypes = {
   classes: PropTypes.object.isRequired,
-  pristine: PropTypes.bool.isRequired,
-  reset: PropTypes.func.isRequired,
-  submitting: PropTypes.bool.isRequired
+  recordUpdate: PropTypes.func.isRequired
 };
 
-export default withStyles(styles)(ResetButton);
+export default withStyles(styles)(UpdateButton);

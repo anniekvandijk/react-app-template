@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Home from '../Pages/Home/Home';
+import Shows from '../Pages/shows/Shows';
 import About from '../Pages/About/About';
 import Settings from '../Pages/Settings/Settings';
 
@@ -18,6 +19,7 @@ const Routes = (props) => {
     <div className={classes.root}>
       <Route exact path="/" component={Home} />
       <Route exact path="/home" component={Home} />
+      <Route exact path="/shows" component={Shows} />
       <Route exact path="/about" component={About} />
       <Route exact path="/settings" component={Settings} />
     </div>

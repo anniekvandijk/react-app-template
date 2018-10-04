@@ -28,4 +28,4 @@ const navigationReducer = (state = initialState, action) => {
   }
 };
 
-export { setSelectedMenuItem, navigationReducer };
+export { setSelectedMenuItem, navigationReducer, actionType };

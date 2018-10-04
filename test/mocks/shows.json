@@ -1,0 +1,46 @@
+{
+  "shows": [
+    {
+      "id": "584735e7-8fec-4c7b-9f57-32dc323fce68",
+      "name": "Internationale Alpacashow",
+      "date": "01-04-2018",
+      "location": "Assen",
+      "showType": "haltershow",
+      "championshipType": "colorchampionship",
+      "judge": "Tim Hay",
+      "judgeSigningUrl": "https://localhost:3000/judgesigns/tim_hay.jpg"
+    },
+    {
+      "id": "d6be5487-6c0d-40f4-8974-b2089d4c8d6b",
+      "name": "Internationale Alpacashow",
+      "date": "05-06-2018",
+      "location": "Hapert",
+      "showType": "haltershow",
+      "championshipType": "colorchampionship",
+      "judge": "Shirley Bettinson",
+      "judgeSigningUrl": "https://localhost:3000/judgesigns/shirley_bettinson.jpg"
+    },
+    {
+      "id": "182f1acf-afc3-458b-96e7-01fbeaab7d70",
+      "name": "Internationale Alpacashow",
+      "date": "05-06-2019",
+      "location": "Boekel",
+      "showType": "haltershow",
+      "championshipType": "colorchampionship",
+      "judge": "Shirley Bettinson",
+      "judgeSigningUrl": "https://localhost:3000/judgesigns/shirley_bettinson.jpg"
+    }
+  ],
+  "activeShow": null,
+  "updateShow": {
+    "id": "d6be5487-6c0d-40f4-8974-b2089d4c8d6b",
+    "name": "Internationale Alpacashow",
+    "date": "05-06-2018",
+    "location": "Hapert",
+    "showType": "haltershow",
+    "championshipType": "colorchampionship",
+    "judge": "Shirley Bettinson",
+    "judgeSigningUrl": "https://localhost:3000/judgesigns/shirley_bettinson.jpg"
+  }
+}
+

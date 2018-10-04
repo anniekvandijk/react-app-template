@@ -1,13 +1,13 @@
 import React from 'react';
 import PageWrapper from '../PageWrapper';
-import FormContainer from '../../Forms/TestForm/FormContainer';
-import SimpleTable from '../../Forms/TestForm/FormTable';
+import AddShowFormContainer from '../shows/AddShowFormContainer';
+import ShowsTable from '../shows/ShowsTable';
 
 const Home = () => (
   <PageWrapper>
     <h1>Homepage</h1>
-    <FormContainer />
-    <SimpleTable />
+    <AddShowFormContainer />
+    <ShowsTable />
   </PageWrapper>
 );
 

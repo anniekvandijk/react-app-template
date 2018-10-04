@@ -48,9 +48,20 @@ class Menu extends React.PureComponent {
           </MenuItem>
           <MenuItem
             component={Link}
-            to="/about"
+            to="/shows"
             selected={selectedItem === 1}
-            onClick={() => setSelected(1, 'About')}
+            onClick={() => setSelected(1, 'Shows')}
+          >
+            <ListItemIcon>
+              <HomeIcon />
+            </ListItemIcon>
+            <ListItemText inset primary="Shows" />
+          </MenuItem>
+          <MenuItem
+            component={Link}
+            to="/about"
+            selected={selectedItem === 2}
+            onClick={() => setSelected(2, 'About')}
           >
             <ListItemIcon>
               <HelpIcon />
@@ -60,8 +71,8 @@ class Menu extends React.PureComponent {
           <MenuItem
             component={Link}
             to="/settings"
-            selected={selectedItem === 2}
-            onClick={() => setSelected(2, 'Settings')}
+            selected={selectedItem === 3}
+            onClick={() => setSelected(3, 'Settings')}
           >
             <ListItemIcon>
               <SettingsIcon />
@@ -77,11 +88,7 @@ class Menu extends React.PureComponent {
 Menu.propTypes = {
   classes: PropTypes.object.isRequired,
   selectedMenuItem: PropTypes.number.isRequired,
-  setSelected: PropTypes.func
-};
-
-Menu.defaultProps = {
-  setSelected: 0
+  setSelected: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({

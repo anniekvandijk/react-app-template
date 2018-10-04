@@ -1,25 +1,24 @@
-import appReducer from '../../src/redux/appReducer';
-import * as actions from '../../src/redux/actions';
+import { setSelectedMenuItem, navigationReducer, actionType } from '../../src/redux/navigationReducer';
 
 describe('Menu set selected', () => {
   it('should return selected menu item', () => {
     const expectedIndex = 1;
     const expectedHeader = 'Test';
-    const menu = actions.setSelectedMenuItem(1, 'Test');
+    const menu = setSelectedMenuItem(1, 'Test');
     expect(menu.payload.selectedMenuItem).toEqual(expectedIndex);
     expect(menu.payload.headerText).toEqual(expectedHeader);
   });
   it('should have an initial state', () => {
     const expectedIndex = 0;
     const expectedHeader = 'Home';
-    const state = appReducer(undefined, actions.actionType.SET_SELECTED_MENU_ITEM);
+    const state = navigationReducer(undefined, actionType.SET_SELECTED_MENU_ITEM);
     expect(state.menu.selectedMenuItem).toEqual(expectedIndex);
     expect(state.menu.headerText).toEqual(expectedHeader);
   });
   it('should change state', () => {
     const expectedIndex = 2;
     const expectedHeader = 'Test';
-    const state = appReducer({ menu: { selectedMenuItem: 2, headerText: 'Test' } }, actions.actionType.SET_SELECTED_MENU_ITEM);
+    const state = navigationReducer({ menu: { selectedMenuItem: 2, headerText: 'Test' } }, actionType.SET_SELECTED_MENU_ITEM);
     expect(state.menu.selectedMenuItem).toEqual(expectedIndex);
     expect(state.menu.headerText).toEqual(expectedHeader);
   });
