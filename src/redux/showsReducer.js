@@ -67,5 +67,7 @@ export {
   createRecord,
   deleteRecord,
   setUpdateRecord,
-  updateRecord
+  updateRecord,
+  unsetUpdateRecord,
+  resetUpdateRecord
 };

@@ -35,6 +35,13 @@ class ShowsTable extends React.PureComponent {
     const {
       classes, shows, deleteR, updateR
     } = this.props;
+    if (shows === null) {
+      return (
+        <Paper>
+          <div className="loading">Loading ... </div>
+        </Paper>
+      );
+    }
     console.log(shows);
     return (
       <Paper className={classes.root}>
@@ -42,10 +49,7 @@ class ShowsTable extends React.PureComponent {
           <TableHead>
             <TableRow>
               <TableCell name="tableheader name">Name</TableCell>
-              <TableCell name="tableheader date">Date</TableCell>
               <TableCell name="tableheader location">Location</TableCell>
-              <TableCell name="tableheader judge">Judge</TableCell>
-              <TableCell name="tableheader showtype">Show type</TableCell>
               <TableCell />
             </TableRow>
           </TableHead>
@@ -53,10 +57,7 @@ class ShowsTable extends React.PureComponent {
             {shows.map(show => (
               <TableRow key={show.id} name={show.id}>
                 <TableCell name={show.name}>{show.name}</TableCell>
-                <TableCell name={show.date}>{show.date}</TableCell>
                 <TableCell name={show.location}>{show.location}</TableCell>
-                <TableCell name={show.judge}>{show.judge}</TableCell>
-                <TableCell name={show.showType}>{show.showType}</TableCell>
                 <TableCell>
                   <UpdateButton recordUpdate={() => updateR(show.id)} />
                   <DeleteButton recordDelete={() => deleteR(show.id)} />
@@ -76,7 +77,11 @@ ShowsTable.propTypes = {
   loadData: PropTypes.func.isRequired,
   deleteR: PropTypes.func.isRequired,
   updateR: PropTypes.func.isRequired,
-  shows: PropTypes.array.isRequired
+  shows: PropTypes.array
+};
+
+ShowsTable.defaultProps = {
+  shows: null
 };
 
 const mapStateToProps = state => ({

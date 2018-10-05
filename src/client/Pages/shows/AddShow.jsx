@@ -1,18 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Field } from 'redux-form';
+import { connect } from 'react-redux';
+import { reduxForm, Field } from 'redux-form';
 import Paper from '@material-ui/core/Paper';
+import createId from '../../utilities/createId';
+import { createRecord } from '../../../redux/showsReducer';
 import RenderedTextField from '../../components/FormFields/TextField';
 import ResetButton from '../../components/Buttons/ResetButton';
 import SubmitButton from '../../components/Buttons/SubmitButton';
 
-const AddShowFormComponent = (props) => {
+const AddShow = (props) => {
   const {
-    handleSubmit, onSubmit, reset, pristine, submitting
+    handleSubmit, pristine, reset, submitting, save
   } = props;
+  const submit = (formValues) => {
+    formValues.id = createId();
+    save(formValues);
+    reset();
+  };
   return (
     <Paper>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(submit)}>
+        <h2>Add Show</h2>
         <div>
           <Field
             name="name"
@@ -44,12 +53,21 @@ const AddShowFormComponent = (props) => {
   );
 };
 
-AddShowFormComponent.propTypes = {
+AddShow.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func.isRequired,
-  pristine: PropTypes.bool.isRequired,
+  pristine: PropTypes.bool,
   reset: PropTypes.func.isRequired,
-  submitting: PropTypes.bool.isRequired
+  submitting: PropTypes.bool,
+  save: PropTypes.func.isRequired
 };
 
-export default (AddShowFormComponent);
+AddShow.defaultProps = {
+  pristine: true,
+  submitting: false
+};
+
+const mapDispatchToProps = dispatch => ({
+  save: formValues => dispatch(createRecord(formValues))
+});
+
+export default connect(null, mapDispatchToProps)(reduxForm({ form: 'add show form' })(AddShow));

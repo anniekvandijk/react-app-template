@@ -20,7 +20,6 @@ const RenderedTextField = (props) => {
     <TextField
       id="textfield"
       className={classes.textField}
-      placeholder={placeholder}
       label={label}
       helperText={helperText}
       multiline={multiline}
@@ -35,7 +34,6 @@ const RenderedTextField = (props) => {
 RenderedTextField.propTypes = {
   classes: PropTypes.object.isRequired,
   label: PropTypes.string.isRequired,
-  placeholder: PropTypes.string.isRequired,
   multiline: PropTypes.bool,
   helperText: PropTypes.string
 };
