@@ -42,7 +42,6 @@ class ShowsTable extends React.PureComponent {
         </Paper>
       );
     }
-    console.log(shows);
     return (
       <Paper className={classes.root}>
         <Table className={classes.table}>

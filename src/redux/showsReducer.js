@@ -44,9 +44,8 @@ const showsReducer = (state = initialState, action) => {
     case actionType.SET_UPDATE_RECORD:
       return { ...state, updateShow: state.shows.filter(shows => shows.id === action.payload) };
     case actionType.UPDATE_RECORD: {
-      const updatedShow = state.updateShow;
-      const notUpdated = state.shows.filter(shows => shows.id !== action.payload);
-      return { ...state, shows: notUpdated.shows.concat(updatedShow) };
+      const notUpdated = state.shows.filter(shows => shows.id !== action.payload.id);
+      return { ...state, shows: notUpdated.concat(action.payload) };
     }
     case actionType.UNSET_UPDATE_RECORD:
       return { ...state, updateShow: null };

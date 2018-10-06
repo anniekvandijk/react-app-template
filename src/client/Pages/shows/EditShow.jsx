@@ -10,13 +10,12 @@ import { updateRecord } from '../../../redux/showsReducer';
 
 const EditShowFormContainer = (props) => {
   const {
-    handleSubmit, pristine, reset, submitting, save, show
+    handleSubmit, pristine, reset, submitting, save, initialValues
   } = props;
   const submit = (formValues) => {
     save(formValues);
-    reset();
   };
-  if (show === null) {
+  if (initialValues === null) {
     return (
       <Paper>
         <div className="loading">Loading ... </div>
@@ -30,20 +29,20 @@ const EditShowFormContainer = (props) => {
         <div>
           <Field
             name="id"
-            value={show.id}
+            value={initialValues.id}
             label="id"
             component={RenderedTextField}
           />
           <Field
             name="name"
-            value={show.name}
+            value={initialValues.name}
             label="Show name"
             helperText="Enter name without location or date"
             component={RenderedTextField}
           />
           <Field
             name="location"
-            value={show.location}
+            value={initialValues.location}
             label="Show Location"
             component={RenderedTextField}
           />
@@ -70,17 +69,16 @@ EditShowFormContainer.propTypes = {
   reset: PropTypes.func.isRequired,
   submitting: PropTypes.bool,
   save: PropTypes.func.isRequired,
-  show: PropTypes.object
+  initialValues: PropTypes.object
 };
 
 EditShowFormContainer.defaultProps = {
   pristine: true,
   submitting: false,
-  show: null
+  initialValues: null
 };
 
 const mapStateToProps = state => ({
-  show: state.shows.updateShow,
   initialValues: state.shows.updateShow
 });
 

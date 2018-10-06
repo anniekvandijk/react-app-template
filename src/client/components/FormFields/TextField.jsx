@@ -15,7 +15,6 @@ const RenderedTextField = (props) => {
   const {
     classes, label, placeholder, multiline, helperText, input, ...extra
   } = props;
-  console.log(props);
   return (
     <TextField
       id="textfield"
