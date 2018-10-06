@@ -36,15 +36,30 @@ function readRecords(path) {
 const showsReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionType.CREATE_RECORD:
-      return { ...state, shows: state.shows.concat(action.payload) };
+      return {
+        ...state,
+        shows: state.shows.concat(action.payload)
+      };
     case actionType.DELETE_RECORD:
-      return { ...state, shows: state.shows.filter(shows => shows.id !== action.payload) };
+      return {
+        ...state,
+        shows: state.shows.filter(shows => shows.id !== action.payload)
+      };
     case actionType.SET_UPDATE_RECORD:
-      return { ...state, updateShow: state.shows.filter(shows => shows.id === action.payload)[0] };
+      return {
+        ...state,
+        updateShow: state.shows.filter(shows => shows.id === action.payload)[0]
+      };
     case actionType.UPDATE_RECORD:
-      return { ...state, shows: state.shows.filter(shows => shows.id !== action.payload.id).concat(action.payload) };
+      return {
+        ...state,
+        shows: state.shows.filter(shows => shows.id !== action.payload.id).concat(action.payload)
+      };
     case actionType.UNSET_UPDATE_RECORD:
-      return { ...state, updateShow: null };
+      return {
+        ...state,
+        updateShow: null
+      };
     case actionType.API_SUCCESS:
       return action.payload;
     case actionType.API_ERROR:
