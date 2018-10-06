@@ -14,7 +14,6 @@ const actionType = {
   DELETE_RECORD: 'DELETE_RECORD',
   UPDATE_RECORD: 'UPDATE_RECORD',
   UNSET_UPDATE_RECORD: 'UNSET_UPDATE_RECORD',
-  RESET_UPDATE_RECORD: 'RESET_UPDATE_RECORD',
   SET_UPDATE_RECORD: 'SET_UPDATE_RECORD'
 };
 
@@ -25,7 +24,6 @@ const deleteRecord = createAction(actionType.DELETE_RECORD);
 const updateRecord = createAction(actionType.UPDATE_RECORD);
 const setUpdateRecord = createAction(actionType.SET_UPDATE_RECORD);
 const unsetUpdateRecord = createAction(actionType.UNSET_UPDATE_RECORD);
-const resetUpdateRecord = createAction(actionType.RESET_UPDATE_RECORD);
 
 function readRecords(path) {
   return function action(dispatch) {
@@ -42,15 +40,11 @@ const showsReducer = (state = initialState, action) => {
     case actionType.DELETE_RECORD:
       return { ...state, shows: state.shows.filter(shows => shows.id !== action.payload) };
     case actionType.SET_UPDATE_RECORD:
-      return { ...state, updateShow: state.shows.filter(shows => shows.id === action.payload) };
-    case actionType.UPDATE_RECORD: {
-      const notUpdated = state.shows.filter(shows => shows.id !== action.payload.id);
-      return { ...state, shows: notUpdated.concat(action.payload) };
-    }
+      return { ...state, updateShow: state.shows.filter(shows => shows.id === action.payload)[0] };
+    case actionType.UPDATE_RECORD:
+      return { ...state, shows: state.shows.filter(shows => shows.id !== action.payload.id).concat(action.payload) };
     case actionType.UNSET_UPDATE_RECORD:
       return { ...state, updateShow: null };
-    case actionType.RESET_UPDATE_RECORD:
-      return { ...state, updateShow: state.shows.filter(shows => shows.id === action.payload) };
     case actionType.API_SUCCESS:
       return action.payload;
     case actionType.API_ERROR:
@@ -67,6 +61,5 @@ export {
   deleteRecord,
   setUpdateRecord,
   updateRecord,
-  unsetUpdateRecord,
-  resetUpdateRecord
+  unsetUpdateRecord
 };

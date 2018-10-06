@@ -28,12 +28,6 @@ const EditShowFormContainer = (props) => {
         <h2>Edit Show</h2>
         <div>
           <Field
-            name="id"
-            value={initialValues.id}
-            label="id"
-            component={RenderedTextField}
-          />
-          <Field
             name="name"
             value={initialValues.name}
             label="Show name"
