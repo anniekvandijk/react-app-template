@@ -80,4 +80,12 @@ const mapDispatchToProps = dispatch => ({
   save: formValues => dispatch(updateRecord(formValues))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(reduxForm({ form: 'edit show form' })(EditShowFormContainer));
+const config = {
+  form: 'edit show form',
+  enableReinitialize: true
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(reduxForm(config)(EditShowFormContainer));
