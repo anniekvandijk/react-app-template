@@ -2,7 +2,7 @@
   "shows": [
     {
       "id": "584735e7-8fec-4c7b-9f57-32dc323fce68",
-      "name": "Internationale Alpacashow",
+      "name": "Nationale Alpacashow",
       "date": "01-04-2018",
       "location": "Assen",
       "showType": "haltershow",
@@ -22,7 +22,7 @@
     },
     {
       "id": "182f1acf-afc3-458b-96e7-01fbeaab7d70",
-      "name": "Internationale Alpacashow",
+      "name": "Europese Alpacashow",
       "date": "05-06-2019",
       "location": "Boekel",
       "showType": "haltershow",

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
+import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import RenderedTextField from '../../components/FormFields/TextField';
 import ResetButton from '../../components/Buttons/ResetButton';
@@ -36,7 +37,7 @@ const AddEditShow = (props) => {
   return (
     <Paper>
       <form onSubmit={handleSubmit(submit)}>
-        <h2>{header}</h2>
+        <Typography variant="title" gutterBottom>{header}</Typography>
         <div>
           <Field
             name="name"

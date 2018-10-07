@@ -1,9 +1,12 @@
 import React from 'react';
+import Typography from '@material-ui/core/Typography';
 import PageWrapper from '../PageWrapper';
 
 const Settings = () => (
   <PageWrapper>
-    <h1>Settings</h1>
+    <Typography variant="display1" gutterBottom>
+        Settings
+    </Typography>
   </PageWrapper>
 );
 

@@ -1,9 +1,12 @@
 import React from 'react';
+import Typography from '@material-ui/core/Typography';
 import PageWrapper from '../PageWrapper';
 
 const About = () => (
   <PageWrapper>
-    <h1>About page</h1>
+    <Typography variant="display1" gutterBottom>
+        About
+    </Typography>
     <span>
       Here there can be some text about the application.
     </span>

@@ -10,6 +10,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import MenuItem from '@material-ui/core/MenuItem';
 import HelpIcon from '@material-ui/icons/Help';
 import HomeIcon from '@material-ui/icons/Home';
+import AddIcon from '@material-ui/icons/Add';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { setSelectedMenuItem } from '../../redux/navigationReducer';
 
@@ -53,7 +54,7 @@ class Menu extends React.PureComponent {
             onClick={() => setSelected(1, 'Shows')}
           >
             <ListItemIcon>
-              <HomeIcon />
+              <AddIcon />
             </ListItemIcon>
             <ListItemText inset primary="Shows" />
           </MenuItem>
