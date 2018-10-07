@@ -2,38 +2,37 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import red from '@material-ui/core/colors/red';
+import AddIcon from '@material-ui/icons/Add';
 
 const styles = theme => ({
   button: {
     margin: theme.spacing.unit,
-    color: '#fff',
-    backgroundColor: red[500],
-    '&:hover': {
-      backgroundColor: red[700]
-    }
+    position: 'absolute',
+    bottom: theme.spacing.unit * 2,
+    right: theme.spacing.unit * 2
   }
 });
 
-const DeleteButton = (props) => {
-  const {
-    classes, onClick
-  } = props;
+const AddButton = (props) => {
+  const { classes, onClick } = props;
   return (
     <Button
-      id="deletebutton"
-      variant="contained"
+      id="addbutton"
+      variant="fab"
+      color="secondary"
+      aria-label="Add"
       className={classes.button}
       type="button"
       onClick={onClick}
-    >Delete
+    >
+      <AddIcon />
     </Button>
   );
 };
 
-DeleteButton.propTypes = {
+AddButton.propTypes = {
   classes: PropTypes.object.isRequired,
   onClick: PropTypes.func.isRequired
 };
 
-export default withStyles(styles)(DeleteButton);
+export default withStyles(styles)(AddButton);

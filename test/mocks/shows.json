@@ -32,15 +32,6 @@
     }
   ],
   "activeShow": null,
-  "updateShow": {
-    "id": "d6be5487-6c0d-40f4-8974-b2089d4c8d6b",
-    "name": "Internationale Alpacashow",
-    "date": "05-06-2018",
-    "location": "Hapert",
-    "showType": "haltershow",
-    "championshipType": "colorchampionship",
-    "judge": "Shirley Bettinson",
-    "judgeSigningUrl": "https://localhost:3000/judgesigns/shirley_bettinson.jpg"
-  }
+  "updateShow": null
 }
 

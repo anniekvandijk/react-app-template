@@ -11,16 +11,16 @@ const styles = theme => ({
 
 const ResetButton = (props) => {
   const {
-    classes, reset, pristine, submitting
+    classes, onClick, submitting
   } = props;
   return (
     <Button
       id="resetbutton"
       color="secondary"
-      disabled={pristine || submitting}
+      disabled={submitting}
       className={classes.button}
       type="button"
-      onClick={reset}
+      onClick={onClick}
     >Cancel
     </Button>
   );
@@ -28,8 +28,7 @@ const ResetButton = (props) => {
 
 ResetButton.propTypes = {
   classes: PropTypes.object.isRequired,
-  pristine: PropTypes.bool.isRequired,
-  reset: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired
 };
 

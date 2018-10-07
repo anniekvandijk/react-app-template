@@ -1,15 +1,11 @@
 import React from 'react';
 import PageWrapper from '../PageWrapper';
-import AddShow from '../shows/AddShow';
-import EditShow from '../shows/EditShow';
-import ShowsTable from '../shows/ShowsTable';
+import ShowContainer from '../shows/ShowContainer';
 
 const Home = () => (
   <PageWrapper>
     <h1>Homepage</h1>
-    {/* <AddShowFormContainer /> */}
-    <EditShow />
-    <ShowsTable />
+    <ShowContainer />
   </PageWrapper>
 );
 

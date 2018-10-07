@@ -58,8 +58,8 @@ class ShowsTable extends React.PureComponent {
                 <TableCell name={show.name}>{show.name}</TableCell>
                 <TableCell name={show.location}>{show.location}</TableCell>
                 <TableCell>
-                  <UpdateButton recordUpdate={() => updateR(show.id)} />
-                  <DeleteButton recordDelete={() => deleteR(show.id)} />
+                  <UpdateButton onClick={() => updateR(show.id)} />
+                  <DeleteButton onClick={() => deleteR(show.id)} />
                 </TableCell>
               </TableRow>
             ))

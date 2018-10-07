@@ -11,7 +11,7 @@ const styles = theme => ({
 
 const UpdateButton = (props) => {
   const {
-    classes, recordUpdate
+    classes, onClick
   } = props;
   return (
     <Button
@@ -20,7 +20,7 @@ const UpdateButton = (props) => {
       variant="contained"
       className={classes.button}
       type="button"
-      onClick={recordUpdate}
+      onClick={onClick}
     >Edit
     </Button>
   );
@@ -28,7 +28,7 @@ const UpdateButton = (props) => {
 
 UpdateButton.propTypes = {
   classes: PropTypes.object.isRequired,
-  recordUpdate: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(UpdateButton);

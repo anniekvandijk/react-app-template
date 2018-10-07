@@ -6,37 +6,46 @@ import Paper from '@material-ui/core/Paper';
 import RenderedTextField from '../../components/FormFields/TextField';
 import ResetButton from '../../components/Buttons/ResetButton';
 import SubmitButton from '../../components/Buttons/SubmitButton';
-import { updateRecord } from '../../../redux/showsReducer';
+import createId from '../../utilities/createId';
+import { createRecord, updateRecord, unsetUpdateRecord } from '../../../redux/showsReducer';
 
-const EditShowFormContainer = (props) => {
+const AddEditShow = (props) => {
   const {
-    handleSubmit, pristine, reset, submitting, save, initialValues
+    handleSubmit, pristine, reset, submitting, recordUpdate,
+    recordAdd, clearUpdateRecord, initialValues
   } = props;
+  const header = initialValues === null ? 'Add show' : 'Edit show';
   const submit = (formValues) => {
-    save(formValues);
+    if (initialValues !== null) {
+      recordUpdate(formValues);
+      clearUpdateRecord(formValues.id);
+    } else {
+      formValues.id = createId();
+      recordAdd(formValues);
+      reset();
+    }
   };
-  if (initialValues === null) {
-    return (
-      <Paper>
-        <div className="loading">Loading ... </div>
-      </Paper>
-    );
-  }
+  const cancel = (formValues) => {
+    console.log('cancel');
+    if (initialValues !== null) {
+      clearUpdateRecord(formValues.id);
+    } else {
+      reset();
+    }
+  };
   return (
     <Paper>
       <form onSubmit={handleSubmit(submit)}>
-        <h2>Edit Show</h2>
+        <h2>{header}</h2>
         <div>
           <Field
             name="name"
-            value={initialValues.name}
             label="Show name"
             helperText="Enter name without location or date"
             component={RenderedTextField}
           />
           <Field
             name="location"
-            value={initialValues.location}
             label="Show Location"
             component={RenderedTextField}
           />
@@ -45,11 +54,12 @@ const EditShowFormContainer = (props) => {
           <ResetButton
             pristine={pristine}
             submitting={submitting}
-            reset={reset}
+            onClick={cancel}
           />
           <SubmitButton
             pristine={pristine}
             submitting={submitting}
+            onClick={() => submit()}
           />
         </div>
       </form>
@@ -57,16 +67,18 @@ const EditShowFormContainer = (props) => {
   );
 };
 
-EditShowFormContainer.propTypes = {
+AddEditShow.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   pristine: PropTypes.bool,
   reset: PropTypes.func.isRequired,
   submitting: PropTypes.bool,
-  save: PropTypes.func.isRequired,
+  recordAdd: PropTypes.func.isRequired,
+  recordUpdate: PropTypes.func.isRequired,
+  clearUpdateRecord: PropTypes.func.isRequired,
   initialValues: PropTypes.object
 };
 
-EditShowFormContainer.defaultProps = {
+AddEditShow.defaultProps = {
   pristine: true,
   submitting: false,
   initialValues: null
@@ -77,15 +89,17 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  save: formValues => dispatch(updateRecord(formValues))
+  recordUpdate: formValues => dispatch(updateRecord(formValues)),
+  recordAdd: formValues => dispatch(createRecord(formValues)),
+  clearUpdateRecord: id => dispatch(unsetUpdateRecord(id))
 });
 
 const config = {
-  form: 'edit show form',
+  form: 'Show form',
   enableReinitialize: true
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(reduxForm(config)(EditShowFormContainer));
+)(reduxForm(config)(AddEditShow));
