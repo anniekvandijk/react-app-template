@@ -1,14 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import Typography from '@material-ui/core/Typography';
 import PageWrapper from '../PageWrapper';
 import AddEditShow from './AddEditShow';
 import ShowsTable from './ShowsTable';
 import AddButton from '../../components/Buttons/AddButton';
+import { showformOpen } from '../../../redux/showsReducer';
 
-const Shows = () => {
-  const openForm = () => {
-    console.log('Click');
-  };
+const Shows = (props) => {
+  const { setOpen } = props;
   return (
     <PageWrapper>
       <div id="showcontainer">
@@ -17,10 +18,22 @@ const Shows = () => {
         </Typography>
         <AddEditShow />
         <ShowsTable />
-        <AddButton onClick={() => openForm()} />
+        <AddButton onClick={() => setOpen()} />
       </div>
     </PageWrapper>
   );
 };
 
-export default Shows;
+Shows.propTypes = {
+  setOpen: PropTypes.bool
+};
+
+Shows.defaultProps = {
+  setOpen: false
+};
+
+const mapDispatchToProps = dispatch => ({
+  setOpen: () => dispatch(showformOpen(true))
+});
+
+export default connect(null, mapDispatchToProps)(Shows);

@@ -8,12 +8,12 @@ import RenderedTextField from '../../components/FormFields/TextField';
 import ResetButton from '../../components/Buttons/ResetButton';
 import SubmitButton from '../../components/Buttons/SubmitButton';
 import createId from '../../utilities/createId';
-import { createRecord, updateRecord, unsetUpdateRecord } from '../../../redux/showsReducer';
+import { createRecord, updateRecord, unsetUpdateRecord, showformOpen } from '../../../redux/showsReducer';
 
 const AddEditShow = (props) => {
   const {
     handleSubmit, pristine, reset, submitting, recordUpdate,
-    recordAdd, clearUpdateRecord, initialValues
+    recordAdd, clearUpdateRecord, initialValues, showformOpen
   } = props;
   const header = initialValues === null ? 'Add show' : 'Edit show';
   const submit = (formValues) => {
@@ -76,23 +76,27 @@ AddEditShow.propTypes = {
   recordAdd: PropTypes.func.isRequired,
   recordUpdate: PropTypes.func.isRequired,
   clearUpdateRecord: PropTypes.func.isRequired,
-  initialValues: PropTypes.object
+  initialValues: PropTypes.object,
+  showformOpen: PropTypes.bool
 };
 
 AddEditShow.defaultProps = {
   pristine: true,
   submitting: false,
-  initialValues: null
+  initialValues: null,
+  showformOpen: false
 };
 
 const mapStateToProps = state => ({
-  initialValues: state.shows.updateShow
+  initialValues: state.shows.updateShow,
+  open: state.shows.showformOpen
 });
 
 const mapDispatchToProps = dispatch => ({
   recordUpdate: formValues => dispatch(updateRecord(formValues)),
   recordAdd: formValues => dispatch(createRecord(formValues)),
-  clearUpdateRecord: id => dispatch(unsetUpdateRecord(id))
+  clearUpdateRecord: id => dispatch(unsetUpdateRecord(id)),
+  setOpen: () => dispatch(showformOpen(false))
 });
 
 const config = {
