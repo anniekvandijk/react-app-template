@@ -8,7 +8,7 @@
     "url": "https://github.com/anniekvandijk/react-app-template"
   },
   "license": "ISC",
-  "main": "src/client/index.js",
+  "main": "src/client/index.jsx",
   "scripts": {
     "start:dev:client": "webpack-dev-server --mode development --config ./config/webpack.base.config.js --hot --inline",
     "start:dev:server": "nodemon src/server/start.js",
