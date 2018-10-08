@@ -25,11 +25,7 @@ const Shows = (props) => {
 };
 
 Shows.propTypes = {
-  setOpen: PropTypes.bool
-};
-
-Shows.defaultProps = {
-  setOpen: false
+  setOpen: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = dispatch => ({

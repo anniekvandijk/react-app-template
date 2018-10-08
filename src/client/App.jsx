@@ -27,13 +27,15 @@ const myTheme = createMuiTheme({
 });
 
 /* eslint-disable no-underscore-dangle */
-const store = createStore(
-  rootReducer,
-  compose(
-    applyMiddleware(thunk),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-  )
+const composeEnhancers = (process.env.NODE_ENV !== 'production'
+  && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__)
+  || compose;
+
+const enhancer = composeEnhancers(
+  applyMiddleware(thunk),
+  // other store enhancers if any
 );
+const store = createStore(rootReducer, enhancer);
 /* eslint-enable */
 
 const App = () => (
