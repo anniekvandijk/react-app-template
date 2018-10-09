@@ -8,9 +8,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { connect } from 'react-redux';
-import { readRecords, deleteRecord, setUpdateRecord } from '../../../redux/showsReducer';
+import { readRecords, setUpdateRecord, showformOpen } from '../../../redux/showsReducer';
 import UpdateButton from '../../components/Buttons/UpdateButton';
-import DeleteButton from '../../components/Buttons/DeleteButton';
 
 const styles = theme => ({
   root: {
@@ -33,7 +32,7 @@ class ShowsTable extends React.PureComponent {
 
   render() {
     const {
-      classes, shows, deleteR, updateR
+      classes, shows, setRecordToUpdate, setShowformOpen
     } = this.props;
     if (shows === null) {
       return (
@@ -42,6 +41,10 @@ class ShowsTable extends React.PureComponent {
         </Paper>
       );
     }
+    const editShow = (id) => {
+      setRecordToUpdate(id);
+      setShowformOpen(true);
+    };
     return (
       <Paper className={classes.root}>
         <Table className={classes.table}>
@@ -58,8 +61,7 @@ class ShowsTable extends React.PureComponent {
                 <TableCell name={show.name}>{show.name}</TableCell>
                 <TableCell name={show.location}>{show.location}</TableCell>
                 <TableCell>
-                  <UpdateButton onClick={() => updateR(show.id)} />
-                  <DeleteButton onClick={() => deleteR(show.id)} />
+                  <UpdateButton onClick={() => editShow(show.id)} />
                 </TableCell>
               </TableRow>
             ))
@@ -74,9 +76,9 @@ class ShowsTable extends React.PureComponent {
 ShowsTable.propTypes = {
   classes: PropTypes.object.isRequired,
   loadData: PropTypes.func.isRequired,
-  deleteR: PropTypes.func.isRequired,
-  updateR: PropTypes.func.isRequired,
-  shows: PropTypes.array
+  setRecordToUpdate: PropTypes.func.isRequired,
+  shows: PropTypes.array,
+  setShowformOpen: PropTypes.func.isRequired
 };
 
 ShowsTable.defaultProps = {
@@ -89,8 +91,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   loadData: () => dispatch(readRecords('/api/shows')),
-  deleteR: id => dispatch(deleteRecord(id)),
-  updateR: id => dispatch(setUpdateRecord(id))
+  setRecordToUpdate: id => dispatch(setUpdateRecord(id)),
+  setShowformOpen: open => dispatch(showformOpen(open))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ShowsTable));
