@@ -24,14 +24,11 @@ const AddEditShow = (props) => {
   const addEditShow = (values) => {
     // update record
     if (initialValues !== null) {
-      console.log(values);
       recordUpdate(values);
       clearUpdateRecord(initialValues.id);
     } else {
     // add record
-      console.log(values);
       values.id = createId();
-      console.log(values);
       recordAdd(values);
       reset();
     }
