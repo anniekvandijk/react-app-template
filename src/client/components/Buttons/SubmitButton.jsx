@@ -11,7 +11,7 @@ const styles = theme => ({
 
 const SubmitButton = (props) => {
   const {
-    classes, pristine, submitting, onClick, buttonText
+    classes, pristine, submitting, buttonText
   } = props;
   return (
     <Button
@@ -21,7 +21,6 @@ const SubmitButton = (props) => {
       color="primary"
       className={classes.button}
       type="submit"
-      onClick={onClick}
     >
       {buttonText}
     </Button>
@@ -32,7 +31,6 @@ SubmitButton.propTypes = {
   classes: PropTypes.object.isRequired,
   pristine: PropTypes.bool.isRequired,
   submitting: PropTypes.bool.isRequired,
-  onClick: PropTypes.func.isRequired,
   buttonText: PropTypes.string
 };
 

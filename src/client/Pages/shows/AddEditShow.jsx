@@ -21,33 +21,41 @@ const AddEditShow = (props) => {
     recordAdd, clearUpdateRecord, deleteR, initialValues, setOpen, isOpen
   } = props;
   const header = initialValues === null ? 'Add show' : 'Edit show';
-  const addEditShow = (values) => {
+  const addEditShow = (formValues) => {
     // update record
     if (initialValues !== null) {
-      recordUpdate(values);
+      console.log('update record');
+      console.log(formValues);
+      recordUpdate(formValues);
       clearUpdateRecord(initialValues.id);
     } else {
     // add record
-      values.id = createId();
-      recordAdd(values);
-      reset();
+      formValues.id = createId();
+      console.log('add');
+      console.log(formValues);
+      recordAdd(formValues);
     }
     setOpen(false);
+    reset();
   };
   const deleteShow = () => {
     if (initialValues !== null) {
+      console.log('delete');
+      console.log(initialValues.id);
       deleteR(initialValues.id);
       clearUpdateRecord(initialValues.id);
       setOpen(false);
+      reset();
     }
   };
   const cancel = () => {
+    console.log('cancel');
     if (initialValues !== null) {
+      console.log(initialValues.id);
       clearUpdateRecord(initialValues.id);
-    } else {
-      reset();
     }
     setOpen(false);
+    reset();
   };
   return (
     <div id="showform">
@@ -80,7 +88,6 @@ const AddEditShow = (props) => {
               <SubmitButton
                 pristine={pristine}
                 submitting={submitting}
-                onClick={() => addEditShow()}
               />
               { initialValues !== null
                 && <DeleteButton onClick={() => deleteShow()} />
@@ -121,10 +128,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  recordUpdate: formValues => dispatch(updateRecord(formValues)),
-  recordAdd: formValues => dispatch(createRecord(formValues)),
-  deleteR: id => dispatch(deleteRecord(id)),
-  clearUpdateRecord: id => dispatch(unsetUpdateRecord(id)),
+  recordUpdate: show => dispatch(updateRecord(show)),
+  recordAdd: show => dispatch(createRecord(show)),
+  deleteR: showId => dispatch(deleteRecord(showId)),
+  clearUpdateRecord: showId => dispatch(unsetUpdateRecord(showId)),
   setOpen: open => dispatch(showformOpen(open))
 });
 
