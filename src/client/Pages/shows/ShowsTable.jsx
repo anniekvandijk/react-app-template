@@ -9,7 +9,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { connect } from 'react-redux';
 import { readRecords, setUpdateRecord, showformOpen } from '../../../redux/showsReducer';
-import UpdateButton from '../../components/Buttons/UpdateButton';
+import PrimaryButton from '../../components/Buttons/PrimaryButton';
 
 const styles = theme => ({
   root: {
@@ -61,7 +61,7 @@ class ShowsTable extends React.PureComponent {
                 <TableCell name={show.name}>{show.name}</TableCell>
                 <TableCell name={show.location}>{show.location}</TableCell>
                 <TableCell>
-                  <UpdateButton onClick={() => editShow(show.id)} />
+                  <PrimaryButton buttonText="edit" onClick={() => editShow(show.id)} />
                 </TableCell>
               </TableRow>
             ))

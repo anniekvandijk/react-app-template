@@ -2,14 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
-import Typography from '@material-ui/core/Typography';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogActions from '@material-ui/core/DialogActions';
 import RenderedTextField from '../../components/FormFields/TextField';
-import ResetButton from '../../components/Buttons/ResetButton';
+import PrimaryButton from '../../components/Buttons/PrimaryButton';
+import SecondaryButton from '../../components/Buttons/SecondaryButton';
 import SubmitButton from '../../components/Buttons/SubmitButton';
 import DeleteButton from '../../components/Buttons/DeleteButton';
 import AddButton from '../../components/Buttons/AddButton';
@@ -82,18 +82,20 @@ class AddEditShow extends React.PureComponent {
             </DialogContentText>
             { initialValues !== null
                 && (
-                <DialogContentText id="alert-dialog-showname">
+                <DialogContentText variant="title" id="alert-dialog-showname">
                   {initialValues.name}
                 </DialogContentText>)
               }
           </DialogContent>
           <DialogActions>
-            <ResetButton
-              pristine={pristine}
-              submitting={submitting}
+            <SecondaryButton
+              buttonText="cancel"
               onClick={() => cancelDelete()}
             />
-            <DeleteButton onClick={() => deleteShow()} />
+            <PrimaryButton
+              buttonText="delete"
+              onClick={() => deleteShow()} 
+            />
           </DialogActions>
         </Dialog>
         <Dialog
@@ -118,9 +120,8 @@ class AddEditShow extends React.PureComponent {
                 />
               </div>
               <div id="showform-actions">
-                <ResetButton
-                  pristine={pristine}
-                  submitting={submitting}
+                <SecondaryButton
+                  buttonText="cancel"
                   onClick={() => cancel()}
                 />
                 <SubmitButton

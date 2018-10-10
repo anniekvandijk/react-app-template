@@ -9,27 +9,26 @@ const styles = theme => ({
   }
 });
 
-const ResetButton = (props) => {
+const SecondaryButton = (props) => {
   const {
-    classes, onClick, submitting
+    classes, onClick, buttonText
   } = props;
   return (
     <Button
-      id="resetbutton"
+      id="secondary-button"
       color="secondary"
-      disabled={submitting}
       className={classes.button}
       type="button"
       onClick={onClick}
-    >Cancel
+    >{buttonText}
     </Button>
   );
 };
 
-ResetButton.propTypes = {
+SecondaryButton.propTypes = {
   classes: PropTypes.object.isRequired,
   onClick: PropTypes.func.isRequired,
-  submitting: PropTypes.bool.isRequired
+  buttonText: PropTypes.string.isRequired
 };
 
-export default withStyles(styles)(ResetButton);
+export default withStyles(styles)(SecondaryButton);

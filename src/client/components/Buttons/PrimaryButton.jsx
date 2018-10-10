@@ -9,26 +9,27 @@ const styles = theme => ({
   }
 });
 
-const UpdateButton = (props) => {
+const PrimaryButton = (props) => {
   const {
-    classes, onClick
+    classes, onClick, buttonText
   } = props;
   return (
     <Button
-      id="updatebutton"
+      id="primary-button"
       color="primary"
       variant="contained"
       className={classes.button}
       type="button"
       onClick={onClick}
-    >Edit
+    >{buttonText}
     </Button>
   );
 };
 
-UpdateButton.propTypes = {
+PrimaryButton.propTypes = {
   classes: PropTypes.object.isRequired,
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired,
+  buttonText: PropTypes.string.isRequired
 };
 
-export default withStyles(styles)(UpdateButton);
+export default withStyles(styles)(PrimaryButton);
