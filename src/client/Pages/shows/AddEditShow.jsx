@@ -82,7 +82,7 @@ class AddEditShow extends React.PureComponent {
             </DialogContentText>
             { initialValues !== null
                 && (
-                <DialogContentText variant="title" id="alert-dialog-showname">
+                <DialogContentText variant="title" id="alert-dialog-detail">
                   {initialValues.name}
                 </DialogContentText>)
               }
@@ -94,7 +94,7 @@ class AddEditShow extends React.PureComponent {
             />
             <PrimaryButton
               buttonText="delete"
-              onClick={() => deleteShow()} 
+              onClick={() => deleteShow()}
             />
           </DialogActions>
         </Dialog>
