@@ -2,9 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
+import Typography from '@material-ui/core/Typography';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogActions from '@material-ui/core/DialogActions';
 import RenderedTextField from '../../components/FormFields/TextField';
 import ResetButton from '../../components/Buttons/ResetButton';
 import SubmitButton from '../../components/Buttons/SubmitButton';
@@ -15,91 +18,127 @@ import {
   createRecord, updateRecord, unsetUpdateRecord, deleteRecord, showformOpen
 } from '../../../redux/showsReducer';
 
-const AddEditShow = (props) => {
-  const {
-    handleSubmit, pristine, reset, submitting, recordUpdate,
-    recordAdd, clearUpdateRecord, deleteR, initialValues, setOpen, isOpen
-  } = props;
-  const header = initialValues === null ? 'Add show' : 'Edit show';
-  const addEditShow = (formValues) => {
-    // update record
-    if (initialValues !== null) {
-      console.log('update record');
-      console.log(formValues);
-      recordUpdate(formValues);
-      clearUpdateRecord(initialValues.id);
-    } else {
-    // add record
-      formValues.id = createId();
-      console.log('add');
-      console.log(formValues);
-      recordAdd(formValues);
-    }
-    setOpen(false);
-    reset();
-  };
-  const deleteShow = () => {
-    if (initialValues !== null) {
-      console.log('delete');
-      console.log(initialValues.id);
-      deleteR(initialValues.id);
-      clearUpdateRecord(initialValues.id);
-      setOpen(false);
+class AddEditShow extends React.PureComponent {
+  state = { deleteDialogOpen: false };
+
+  render() {
+    const {
+      handleSubmit, pristine, reset, submitting, recordUpdate,
+      recordAdd, clearUpdateRecord, recordDelete, initialValues, setFormOpen, formIsOpen
+    } = this.props;
+    const header = initialValues === null ? 'Add show' : 'Edit show';
+    const addEditShow = (formValues) => {
+      // update record
+      if (initialValues !== null) {
+        console.log('update record');
+        console.log(formValues);
+        recordUpdate(formValues);
+        clearUpdateRecord(initialValues.id);
+      } else {
+      // add record
+        formValues.id = createId();
+        console.log('add');
+        console.log(formValues);
+        recordAdd(formValues);
+      }
+      setFormOpen(false);
       reset();
-    }
-  };
-  const cancel = () => {
-    console.log('cancel');
-    if (initialValues !== null) {
-      console.log(initialValues.id);
-      clearUpdateRecord(initialValues.id);
-    }
-    setOpen(false);
-    reset();
-  };
-  return (
-    <div id="showform">
-      <Dialog
-        open={isOpen}
-        aria-labelledby="showform-dialog-title"
-      >
-        <DialogTitle id="showform-dialog-title">{header}</DialogTitle>
-        <DialogContent>
-          <form onSubmit={handleSubmit(addEditShow)}>
-            <div id="showform-fields">
-              <Field
-                name="name"
-                label="Show name"
-                helperText="Enter name without location or date"
-                component={RenderedTextField}
-              />
-              <Field
-                name="location"
-                label="Show Location"
-                component={RenderedTextField}
-              />
-            </div>
-            <div id="showform-actions">
-              <ResetButton
-                pristine={pristine}
-                submitting={submitting}
-                onClick={() => cancel()}
-              />
-              <SubmitButton
-                pristine={pristine}
-                submitting={submitting}
-              />
-              { initialValues !== null
-                && <DeleteButton onClick={() => deleteShow()} />
+    };
+    const deleteShow = () => {
+      if (initialValues !== null) {
+        console.log('delete');
+        console.log(initialValues.id);
+        recordDelete(initialValues.id);
+        clearUpdateRecord(initialValues.id);
+        this.setState({ deleteDialogOpen: false });
+        setFormOpen(false);
+        reset();
+      }
+    };
+    const cancelDelete = () => {
+      console.log('cancel delete');
+      this.setState({ deleteDialogOpen: false });
+    };
+    const cancel = () => {
+      console.log('cancel');
+      if (initialValues !== null) {
+        console.log(initialValues.id);
+        clearUpdateRecord(initialValues.id);
+      }
+      setFormOpen(false);
+      reset();
+    };
+    return (
+      <div id="showform">
+        <Dialog
+          id="delete-dialog"
+          open={this.state.deleteDialogOpen}
+          aria-labelledby="delete-dialog-title"
+        >
+          <DialogTitle id="delete-dialog-title">Delete</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              Are you sure you want to delete this show?
+            </DialogContentText>
+            { initialValues !== null
+                && (
+                <DialogContentText id="alert-dialog-showname">
+                  {initialValues.name}
+                </DialogContentText>)
               }
-            </div>
-          </form>
-        </DialogContent>
-      </Dialog>
-      <AddButton onClick={() => setOpen(true)} />
-    </div>
-  );
-};
+          </DialogContent>
+          <DialogActions>
+            <ResetButton
+              pristine={pristine}
+              submitting={submitting}
+              onClick={() => cancelDelete()}
+            />
+            <DeleteButton onClick={() => deleteShow()} />
+          </DialogActions>
+        </Dialog>
+        <Dialog
+          id="showform-dialog"
+          open={formIsOpen}
+          aria-labelledby="showform-dialog-title"
+        >
+          <DialogTitle id="showform-dialog-title">{header}</DialogTitle>
+          <DialogContent>
+            <form onSubmit={handleSubmit(addEditShow)}>
+              <div id="showform-fields">
+                <Field
+                  name="name"
+                  label="Show name"
+                  helperText="Enter name without location or date"
+                  component={RenderedTextField}
+                />
+                <Field
+                  name="location"
+                  label="Show Location"
+                  component={RenderedTextField}
+                />
+              </div>
+              <div id="showform-actions">
+                <ResetButton
+                  pristine={pristine}
+                  submitting={submitting}
+                  onClick={() => cancel()}
+                />
+                <SubmitButton
+                  pristine={pristine}
+                  submitting={submitting}
+                />
+                { initialValues !== null
+                  && <DeleteButton onClick={() => { this.setState({ deleteDialogOpen: true }); }} />
+                }
+              </div>
+            </form>
+          </DialogContent>
+        </Dialog>
+        <AddButton onClick={() => setFormOpen(true)} />
+      </div>
+    );
+  }
+}
 
 AddEditShow.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
@@ -109,30 +148,30 @@ AddEditShow.propTypes = {
   recordAdd: PropTypes.func.isRequired,
   recordUpdate: PropTypes.func.isRequired,
   clearUpdateRecord: PropTypes.func.isRequired,
-  deleteR: PropTypes.func.isRequired,
+  recordDelete: PropTypes.func.isRequired,
   initialValues: PropTypes.object,
-  setOpen: PropTypes.func.isRequired,
-  isOpen: PropTypes.bool
+  setFormOpen: PropTypes.func.isRequired,
+  formIsOpen: PropTypes.bool
 };
 
 AddEditShow.defaultProps = {
   pristine: true,
   submitting: false,
   initialValues: null,
-  isOpen: false
+  formIsOpen: false
 };
 
 const mapStateToProps = state => ({
   initialValues: state.shows.updateShow,
-  isOpen: state.shows.showformOpen
+  formIsOpen: state.shows.showformOpen
 });
 
 const mapDispatchToProps = dispatch => ({
   recordUpdate: show => dispatch(updateRecord(show)),
   recordAdd: show => dispatch(createRecord(show)),
-  deleteR: showId => dispatch(deleteRecord(showId)),
+  recordDelete: showId => dispatch(deleteRecord(showId)),
   clearUpdateRecord: showId => dispatch(unsetUpdateRecord(showId)),
-  setOpen: open => dispatch(showformOpen(open))
+  setFormOpen: open => dispatch(showformOpen(open))
 });
 
 const config = {
