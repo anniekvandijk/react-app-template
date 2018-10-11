@@ -2,7 +2,7 @@ import { createAction } from 'redux-actions';
 import Api from '../client/api/Api';
 
 const initialState = {
-  shows: [],
+  shows: null,
   updateShow: null,
   activeShow: null,
   showformOpen: false
