@@ -1,6 +1,11 @@
+import React from 'react';
 import express from 'express';
 import path from 'path';
 import http from 'http';
+import { renderToString } from 'react-dom/server';
+import StaticRouter from 'react-router-dom/StaticRouter';
+import Routes from '../shared/Routes';
+
 
 const app = express();
 const routePath = path.join(__dirname, '..', '..', '..', 'dist/', 'index.html');
@@ -16,8 +21,18 @@ app.use('api/shows/add', (req, res) => {
   res.send({ response: 'hi' });
 });
 
-app.use('*', (req, res) => {
-  res.sendFile(routePath);
+// app.use('*', (req, res) => {
+//   res.sendFile(routePath);
+// });
+
+app.get('*', (req, res) => {
+  const context = {};
+  const content = renderToString(
+    <StaticRouter location={req.url} context={context}>
+      <Routes />
+    </StaticRouter>
+  );
+  res.render(routePath, {title: 'Express', data: false, content });
 });
 
 /** Get port from environment and store in Express. */

@@ -1,12 +1,10 @@
 import React from 'react';
-import { BrowserRouter, Switch } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import red from '@material-ui/core/colors/red';
-import Routes from './Main/Routes';
-import rootReducer from '../redux/rootReducer';
+import addstore from '../shared/store';
+import Routes from '../shared/Routes';
 
 const myTheme = createMuiTheme({
   palette: {
@@ -26,25 +24,11 @@ const myTheme = createMuiTheme({
   }
 });
 
-/* eslint-disable no-underscore-dangle */
-const composeEnhancers = (process.env.NODE_ENV !== 'production'
-  && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__)
-  || compose;
-
-const enhancer = composeEnhancers(
-  applyMiddleware(thunk),
-  // other store enhancers if any
-);
-const store = createStore(rootReducer, enhancer);
-/* eslint-enable */
-
 const App = () => (
-  <Provider store={store}>
+  <Provider store={addstore}>
     <BrowserRouter>
       <MuiThemeProvider theme={myTheme}>
-        <Switch>
-          <Routes />
-        </Switch>
+        <Routes />
       </MuiThemeProvider>
     </BrowserRouter>
   </Provider>
