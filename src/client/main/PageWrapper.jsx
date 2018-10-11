@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import Header from '../Main/Header';
-import Menu from '../Main/Menu';
+import Header from './Header';
+import Menu from './Menu';
 
 const styles = theme => ({
   root: {

@@ -1,13 +1,16 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
-import PageWrapper from '../PageWrapper';
+import PageWrapper from '../main/PageWrapper';
 
-const Settings = () => (
+const About = () => (
   <PageWrapper>
     <Typography variant="display1" gutterBottom>
-        Settings
+        About
     </Typography>
+    <span>
+      Here there can be some text about the application.
+    </span>
   </PageWrapper>
 );
 
-export default Settings;
+export default About;

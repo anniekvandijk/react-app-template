@@ -1,13 +1,13 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
-import PageWrapper from '../PageWrapper';
+import PageWrapper from '../main/PageWrapper';
 
-const Home = () => (
+const Settings = () => (
   <PageWrapper>
     <Typography variant="display1" gutterBottom>
-        Homepage
+        Settings
     </Typography>
   </PageWrapper>
 );
 
-export default Home;
+export default Settings;
