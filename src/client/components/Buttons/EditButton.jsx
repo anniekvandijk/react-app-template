@@ -2,41 +2,39 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import red from '@material-ui/core/colors/red';
+import EditIcon from '@material-ui/icons/Edit';
 import CustomTooltip from '../CustomTooltip';
 
 const styles = theme => ({
   button: {
-    margin: theme.spacing.unit,
-    color: '#fff',
-    backgroundColor: red[500],
-    '&:hover': {
-      backgroundColor: red[700]
-    }
+    margin: theme.spacing.unit
   }
 });
 
-const DeleteButton = (props) => {
+const EditButton = (props) => {
   const {
     classes, onClick
   } = props;
   return (
-    <CustomTooltip title="Delete">
+    <CustomTooltip title="Edit">
       <Button
-        id="deletebutton"
-        variant="contained"
+        variant="fab"
+        mini
+        color="primary"
+        aria-label="Edit"
+        id="edit-button"
         className={classes.button}
-        type="button"
         onClick={onClick}
-      >Delete
+      >
+        <EditIcon />
       </Button>
     </CustomTooltip>
   );
 };
 
-DeleteButton.propTypes = {
+EditButton.propTypes = {
   classes: PropTypes.object.isRequired,
   onClick: PropTypes.func.isRequired
 };
 
-export default withStyles(styles)(DeleteButton);
+export default withStyles(styles)(EditButton);

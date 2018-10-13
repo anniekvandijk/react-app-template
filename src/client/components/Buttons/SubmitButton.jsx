@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import CustomTooltip from '../CustomTooltip';
 
 const styles = theme => ({
   button: {
@@ -14,16 +15,18 @@ const SubmitButton = (props) => {
     classes, pristine, submitting, buttonText
   } = props;
   return (
-    <Button
-      id="submitbutton"
-      variant="contained"
-      disabled={pristine || submitting}
-      color="primary"
-      className={classes.button}
-      type="submit"
-    >
-      {buttonText}
-    </Button>
+    <CustomTooltip title={buttonText}>
+      <Button
+        id="submitbutton"
+        variant="contained"
+        disabled={pristine || submitting}
+        color="primary"
+        className={classes.button}
+        type="submit"
+      >
+        {buttonText}
+      </Button>
+    </CustomTooltip>
   );
 };
 
@@ -35,7 +38,7 @@ SubmitButton.propTypes = {
 };
 
 SubmitButton.defaultProps = {
-  buttonText: 'submit'
+  buttonText: 'Submit'
 };
 
 export default withStyles(styles)(SubmitButton);

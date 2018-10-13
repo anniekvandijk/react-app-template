@@ -9,7 +9,8 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { connect } from 'react-redux';
 import { readRecords, setUpdateRecord, showformOpen } from '../../../redux/showsReducer';
-import PrimaryButton from '../../components/Buttons/PrimaryButton';
+import EditButton from '../../components/Buttons/EditButton';
+import Loader from '../../components/Loader';
 
 const styles = theme => ({
   root: {
@@ -36,9 +37,7 @@ class ShowsTable extends React.PureComponent {
     } = this.props;
     if (shows === null) {
       return (
-        <Paper>
-          <div className="loading">Loading ... </div>
-        </Paper>
+        <Loader />
       );
     }
     const editShow = (id) => {
@@ -50,19 +49,19 @@ class ShowsTable extends React.PureComponent {
         <Table className={classes.table}>
           <TableHead>
             <TableRow>
+              <TableCell />
               <TableCell name="tableheader name">Name</TableCell>
               <TableCell name="tableheader location">Location</TableCell>
-              <TableCell />
             </TableRow>
           </TableHead>
           <TableBody>
             {shows.map(show => (
               <TableRow key={show.id} name={show.id}>
+                <TableCell>
+                  <EditButton onClick={() => editShow(show.id)} />
+                </TableCell>
                 <TableCell name={show.name}>{show.name}</TableCell>
                 <TableCell name={show.location}>{show.location}</TableCell>
-                <TableCell>
-                  <PrimaryButton buttonText="edit" onClick={() => editShow(show.id)} />
-                </TableCell>
               </TableRow>
             ))
             }

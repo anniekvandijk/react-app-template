@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import CustomTooltip from '../CustomTooltip';
 
 const styles = theme => ({
   button: {
@@ -14,15 +15,17 @@ const PrimaryButton = (props) => {
     classes, onClick, buttonText
   } = props;
   return (
-    <Button
-      id="primary-button"
-      color="primary"
-      variant="contained"
-      className={classes.button}
-      type="button"
-      onClick={onClick}
-    >{buttonText}
-    </Button>
+    <CustomTooltip title={buttonText}>
+      <Button
+        id="primary-button"
+        color="primary"
+        variant="contained"
+        className={classes.button}
+        type="button"
+        onClick={onClick}
+      >{buttonText}
+      </Button>
+    </CustomTooltip>
   );
 };
 

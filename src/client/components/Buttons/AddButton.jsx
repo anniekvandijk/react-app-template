@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
+import CustomTooltip from '../CustomTooltip';
 
 const styles = theme => ({
   button: {
@@ -16,17 +17,19 @@ const styles = theme => ({
 const AddButton = (props) => {
   const { classes, onClick } = props;
   return (
-    <Button
-      id="addbutton"
-      variant="fab"
-      color="secondary"
-      aria-label="Add"
-      className={classes.button}
-      type="button"
-      onClick={onClick}
-    >
-      <AddIcon />
-    </Button>
+    <CustomTooltip title="Add">
+      <Button
+        id="addbutton"
+        variant="fab"
+        color="secondary"
+        aria-label="Add"
+        className={classes.button}
+        type="button"
+        onClick={onClick}
+      >
+        <AddIcon />
+      </Button>
+    </CustomTooltip>
   );
 };
 

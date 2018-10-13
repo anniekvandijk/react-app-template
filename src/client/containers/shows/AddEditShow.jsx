@@ -121,7 +121,7 @@ class AddEditShow extends React.PureComponent {
               </div>
               <div id="showform-actions">
                 <SecondaryButton
-                  buttonText="cancel"
+                  buttonText="Cancel"
                   onClick={() => cancel()}
                 />
                 <SubmitButton
