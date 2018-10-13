@@ -18,8 +18,8 @@ const CustomTooltip = (props) => {
   return (
     <Tooltip
       title={title}
-      enterDelay={200}
-      leaveDelay={200}
+      enterDelay={100}
+      leaveDelay={100}
       disableFocusListener
       TransitionComponent={Zoom}
       classes={{ tooltip: classes.lightTooltip }}
