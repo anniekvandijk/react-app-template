@@ -8,8 +8,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogActions from '@material-ui/core/DialogActions';
 import RenderedTextField from '../../components/FormFields/TextField';
-import PrimaryButton from '../../components/Buttons/PrimaryButton';
-import SecondaryButton from '../../components/Buttons/SecondaryButton';
+import CancelButton from '../../components/Buttons/CancelButton';
 import SubmitButton from '../../components/Buttons/SubmitButton';
 import DeleteButton from '../../components/Buttons/DeleteButton';
 import AddButton from '../../components/Buttons/AddButton';
@@ -88,12 +87,10 @@ class AddEditShow extends React.PureComponent {
               }
           </DialogContent>
           <DialogActions>
-            <SecondaryButton
-              buttonText="cancel"
+            <CancelButton
               onClick={() => cancelDelete()}
             />
-            <PrimaryButton
-              buttonText="delete"
+            <DeleteButton
               onClick={() => deleteShow()}
             />
           </DialogActions>
@@ -104,8 +101,8 @@ class AddEditShow extends React.PureComponent {
           aria-labelledby="showform-dialog-title"
         >
           <DialogTitle id="showform-dialog-title">{header}</DialogTitle>
-          <DialogContent>
-            <form onSubmit={handleSubmit(addEditShow)}>
+          <form onSubmit={handleSubmit(addEditShow)}>
+            <DialogContent>
               <div id="showform-fields">
                 <Field
                   name="name"
@@ -119,21 +116,20 @@ class AddEditShow extends React.PureComponent {
                   component={RenderedTextField}
                 />
               </div>
-              <div id="showform-actions">
-                <SecondaryButton
-                  buttonText="Cancel"
-                  onClick={() => cancel()}
-                />
-                <SubmitButton
-                  pristine={pristine}
-                  submitting={submitting}
-                />
-                { initialValues !== null
-                  && <DeleteButton onClick={() => { this.setState({ deleteDialogOpen: true }); }} />
-                }
-              </div>
-            </form>
-          </DialogContent>
+            </DialogContent>
+            <DialogActions>
+              <CancelButton
+                onClick={() => cancel()}
+              />
+              <SubmitButton
+                pristine={pristine}
+                submitting={submitting}
+              />
+              { initialValues !== null
+                && <DeleteButton onClick={() => { this.setState({ deleteDialogOpen: true }); }} />
+              }
+            </DialogActions>
+          </form>
         </Dialog>
         <AddButton onClick={() => setFormOpen(true)} />
       </div>

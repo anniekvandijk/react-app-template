@@ -19,7 +19,7 @@ const AddButton = (props) => {
   return (
     <CustomTooltip title="Add">
       <Button
-        id="addbutton"
+        id="add-button"
         variant="fab"
         color="secondary"
         aria-label="Add"
