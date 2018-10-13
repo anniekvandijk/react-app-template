@@ -58,7 +58,7 @@ class ShowsTable extends React.PureComponent {
             {shows.map(show => (
               <TableRow key={show.id} name={show.id}>
                 <TableCell>
-                  <EditButton onClick={() => editShow(show.id)} />
+                  <EditButton editButtonClick={() => editShow(show.id)} />
                 </TableCell>
                 <TableCell name={show.name}>{show.name}</TableCell>
                 <TableCell name={show.location}>{show.location}</TableCell>

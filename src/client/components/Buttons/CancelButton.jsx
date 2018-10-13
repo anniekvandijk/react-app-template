@@ -13,7 +13,7 @@ const styles = theme => ({
 
 const CancelButton = (props) => {
   const {
-    classes, onClick
+    classes, cancelButtonClick
   } = props;
   return (
     <CustomTooltip title="Cancel">
@@ -24,7 +24,7 @@ const CancelButton = (props) => {
         aria-label="Cancel"
         id="cancel-button"
         className={classes.button}
-        onClick={onClick}
+        onClick={cancelButtonClick}
       >
         <UndoIcon />
       </Button>
@@ -34,7 +34,7 @@ const CancelButton = (props) => {
 
 CancelButton.propTypes = {
   classes: PropTypes.object.isRequired,
-  onClick: PropTypes.func.isRequired
+  cancelButtonClick: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(CancelButton);

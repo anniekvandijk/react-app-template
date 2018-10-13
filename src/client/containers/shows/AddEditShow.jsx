@@ -88,10 +88,10 @@ class AddEditShow extends React.PureComponent {
           </DialogContent>
           <DialogActions>
             <CancelButton
-              onClick={() => cancelDelete()}
+              cancelButtonClick={() => cancelDelete()}
             />
             <DeleteButton
-              onClick={() => deleteShow()}
+              deleteButtonClick={() => deleteShow()}
             />
           </DialogActions>
         </Dialog>
@@ -119,19 +119,19 @@ class AddEditShow extends React.PureComponent {
             </DialogContent>
             <DialogActions>
               <CancelButton
-                onClick={() => cancel()}
+                cancelButtonClick={() => cancel()}
               />
               <SubmitButton
                 pristine={pristine}
                 submitting={submitting}
               />
               { initialValues !== null
-                && <DeleteButton onClick={() => { this.setState({ deleteDialogOpen: true }); }} />
+                && <DeleteButton deleteButtonClick={() => { this.setState({ deleteDialogOpen: true }); }} />
               }
             </DialogActions>
           </form>
         </Dialog>
-        <AddButton onClick={() => setFormOpen(true)} />
+        <AddButton addButtonClick={() => setFormOpen(true)} />
       </div>
     );
   }

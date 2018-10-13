@@ -19,7 +19,7 @@ const styles = theme => ({
 
 const DeleteButton = (props) => {
   const {
-    classes, onClick
+    classes, deleteButtonClick
   } = props;
   return (
     <CustomTooltip title="Delete">
@@ -30,7 +30,7 @@ const DeleteButton = (props) => {
         aria-label="Delete"
         className={classes.button}
         type="button"
-        onClick={onClick}
+        onClick={deleteButtonClick}
       >
         <DeleteIcon />
       </Button>
@@ -40,7 +40,7 @@ const DeleteButton = (props) => {
 
 DeleteButton.propTypes = {
   classes: PropTypes.object.isRequired,
-  onClick: PropTypes.func.isRequired
+  deleteButtonClick: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(DeleteButton);
