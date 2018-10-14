@@ -9,7 +9,7 @@ const Shows = () => (
     <Typography variant="display1" gutterBottom>
       Shows
     </Typography>
-    <ShowsContainer />
+    <ShowsContainer id="shows-container" />
   </PageWrapper>
 );
 

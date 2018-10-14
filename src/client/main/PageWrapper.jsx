@@ -29,10 +29,10 @@ const PageWrapper = (props) => {
   const { classes, children } = props;
   return (
     <div className={classes.root}>
-      <Header />
-      <Menu />
+      <Header id="header" />
+      <Menu id="main-menu" />
       <main className={classes.content}>
-        <div className={classes.toolbar} />
+        <div id="main-content" className={classes.toolbar} />
         <Typography component="div">
           {children}
         </Typography>

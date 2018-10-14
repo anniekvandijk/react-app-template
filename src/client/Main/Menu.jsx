@@ -29,13 +29,16 @@ class Menu extends React.PureComponent {
     const { classes, selectedMenuItem: selectedItem, setSelected } = this.props;
     return (
       <Drawer
+        id="main-menu-drawer"
         variant="permanent"
         classes={{
           paper: classes.drawerPaper
         }}
       >
         <div className={classes.toolbar} />
-        <MenuList>
+        <MenuList
+          id="main-menu-list"
+        >
           <MenuItem
             component={Link}
             to="/home"
