@@ -39,7 +39,11 @@ const AlertDialog = (props) => {
 AlertDialog.propTypes = {
   handleCancelClick: PropTypes.func.isRequired,
   handleOkClick: PropTypes.func.isRequired,
-  children: PropTypes.object.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.array,
+    PropTypes.string
+  ]).isRequired,
   title: PropTypes.string.isRequired,
   alertDialogOpen: PropTypes.bool
 };

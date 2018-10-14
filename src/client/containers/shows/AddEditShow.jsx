@@ -23,7 +23,7 @@ class AddEditShow extends React.PureComponent {
 
   render() {
     const {
-      handleSubmit, pristine, reset, submitting, recordUpdate,
+      setAlertDialogOpen, handleSubmit, pristine, reset, submitting, recordUpdate,
       recordAdd, clearUpdateRecord, recordDelete, initialValues, setFormOpen, formIsOpen
     } = this.props;
     const header = initialValues === null ? 'Add show' : 'Edit show';
@@ -120,6 +120,9 @@ class AddEditShow extends React.PureComponent {
             </DialogContent>
             <DialogActions>
               <CancelButton
+                onClick={setAlertDialogOpen}
+              />
+              <CancelButton
                 onClick={() => cancel()}
               />
               <SubmitButton
@@ -149,7 +152,8 @@ AddEditShow.propTypes = {
   recordDelete: PropTypes.func.isRequired,
   initialValues: PropTypes.object,
   setFormOpen: PropTypes.func.isRequired,
-  formIsOpen: PropTypes.bool
+  formIsOpen: PropTypes.bool,
+  setAlertDialogOpen: PropTypes.func.isRequired
 };
 
 AddEditShow.defaultProps = {
