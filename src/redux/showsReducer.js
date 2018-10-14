@@ -8,6 +8,7 @@ const initialState = {
 };
 
 const actionType = {
+  API_CALL_STARTED: 'API_CALL_STARTED',
   API_SUCCESS: 'API_SUCCESS',
   API_ERROR: 'API_ERROR',
   CREATE_RECORD: 'CREATE_RECORD',
@@ -17,6 +18,7 @@ const actionType = {
   SET_UPDATE_RECORD: 'SET_UPDATE_RECORD'
 };
 
+const apiCallStarted = createAction(actionType.API_CALL_STARTED);
 const apiSuccess = createAction(actionType.API_SUCCESS);
 const apiError = createAction(actionType.API_ERROR);
 const createRecord = createAction(actionType.CREATE_RECORD);
@@ -25,13 +27,14 @@ const updateRecord = createAction(actionType.UPDATE_RECORD);
 const setUpdateRecord = createAction(actionType.SET_UPDATE_RECORD);
 const unsetUpdateRecord = createAction(actionType.UNSET_UPDATE_RECORD);
 
-function readRecords(path) {
-  return function action(dispatch) {
-    return Api.get(path)
+const readRecords = (path) => {
+  return (dispatch) => {
+    dispatch(apiCallStarted());
+    Api.get(path)
       .then(shows => dispatch(apiSuccess(shows)))
       .catch(error => dispatch(apiError(error)));
   };
-}
+};
 
 const showsReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -60,6 +63,8 @@ const showsReducer = (state = initialState, action) => {
         ...state,
         updateShow: null
       };
+    case actionType.API_CALL_STARTED:
+      return state;
     case actionType.API_SUCCESS:
       return action.payload;
     case actionType.API_ERROR:
