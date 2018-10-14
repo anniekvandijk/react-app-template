@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Typography from '@material-ui/core/Typography';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import Dialog from '@material-ui/core/Dialog';
@@ -78,25 +79,29 @@ class AddEditShow extends React.PureComponent {
       reset();
     };
     return (
-      <div id="showform">
+      <div id="shows-form">
         <Dialog
-          id="delete-dialog"
+          id="shows-form-delete-dialog"
           open={deleteDialogOpen}
-          aria-labelledby="delete-dialog-title"
+          aria-labelledby="shows-form-delete-dialog-title"
         >
-          <DialogTitle id="delete-dialog-title">Delete</DialogTitle>
+          <DialogTitle id="shows-form-delete-dialog-title">Delete</DialogTitle>
           <DialogContent>
-            <DialogContentText id="alert-dialog-description">
-              Are you sure you want to delete this show?
-            </DialogContentText>
-            { initialValues !== null
+            <DialogContentText component="div" id="shows-form-delete-dialog-description">
+              <Typography variant="body1" gutterBottom>
+                Are you sure you want to delete this show?
+              </Typography>
+              { initialValues !== null
                 && (
-                <DialogContentText variant="title" id="alert-dialog-detail">
+                <Typography variant="title" gutterBottom>
                   {initialValues.name}
-                </DialogContentText>)
+                  <br />
+                  {initialValues.location}
+                </Typography>)
               }
+            </DialogContentText>
           </DialogContent>
-          <DialogActions>
+          <DialogActions id="shows-form-delete-dialog-actions">
             <CancelButton
               onClick={() => cancelDelete()}
             />
@@ -106,14 +111,14 @@ class AddEditShow extends React.PureComponent {
           </DialogActions>
         </Dialog>
         <Dialog
-          id="showform-dialog"
+          id="shows-form-dialog"
           open={showFormIsOpen}
-          aria-labelledby="showform-dialog-title"
+          aria-labelledby="shows-form-dialog-title"
         >
-          <DialogTitle id="showform-dialog-title">{header}</DialogTitle>
+          <DialogTitle id="shows-form-dialog-title">{header}</DialogTitle>
           <form onSubmit={handleSubmit(addEditShow)}>
             <DialogContent>
-              <div id="showform-fields">
+              <div id="shows-form-fields">
                 <Field
                   name="name"
                   label="Show name"
@@ -127,7 +132,7 @@ class AddEditShow extends React.PureComponent {
                 />
               </div>
             </DialogContent>
-            <DialogActions>
+            <DialogActions id="shows-form-dialog-actions">
               <CancelButton
                 onClick={() => cancel()}
               />
