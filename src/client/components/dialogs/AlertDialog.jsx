@@ -1,0 +1,51 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import Dialog from '@material-ui/core/Dialog';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogActions from '@material-ui/core/DialogActions';
+import CancelButton from '../Buttons/CancelButton';
+import OkButton from '../Buttons/OkButton';
+
+const AlertDialog = (props) => {
+  const {
+    alertDialogOpen, handleOkClick, handleCancelClick, title, children
+  } = props;
+  return (
+    <Dialog
+      id="delete-dialog"
+      open={alertDialogOpen}
+      aria-labelledby="delete-dialog-title"
+    >
+      <DialogTitle id="delete-dialog-title">{title}</DialogTitle>
+      <DialogContent>
+        <DialogContentText id="alert-dialog-description">
+          {children}
+        </DialogContentText>
+      </DialogContent>
+      <DialogActions>
+        <CancelButton
+          onClick={handleCancelClick}
+        />
+        <OkButton
+          onClick={handleOkClick}
+        />
+      </DialogActions>
+    </Dialog>
+  );
+};
+
+AlertDialog.propTypes = {
+  handleCancelClick: PropTypes.func.isRequired,
+  handleOkClick: PropTypes.func.isRequired,
+  children: PropTypes.object.isRequired,
+  title: PropTypes.string.isRequired,
+  alertDialogOpen: PropTypes.bool
+};
+
+AlertDialog.defaultProps = {
+  alertDialogOpen: false
+};
+
+export default AlertDialog;

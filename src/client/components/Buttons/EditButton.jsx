@@ -13,7 +13,7 @@ const styles = theme => ({
 
 const EditButton = (props) => {
   const {
-    classes, editButtonClick
+    classes, onClick
   } = props;
   return (
     <CustomTooltip title="Edit">
@@ -24,7 +24,7 @@ const EditButton = (props) => {
         aria-label="Edit"
         id="edit-button"
         className={classes.button}
-        onClick={editButtonClick}
+        onClick={onClick}
       >
         <EditIcon />
       </Button>
@@ -34,7 +34,7 @@ const EditButton = (props) => {
 
 EditButton.propTypes = {
   classes: PropTypes.object.isRequired,
-  editButtonClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(EditButton);

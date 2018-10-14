@@ -2,12 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import green from '@material-ui/core/colors/green';
 import SaveIcon from '@material-ui/icons/Save';
 import CustomTooltip from '../CustomTooltip';
 
 const styles = theme => ({
   button: {
-    margin: theme.spacing.unit
+    margin: theme.spacing.unit,
+    color: '#fff',
+    backgroundColor: green[500],
+    '&:hover': {
+      backgroundColor: green[700]
+    }
   }
 });
 
@@ -24,7 +30,6 @@ const SubmitButton = (props) => {
           aria-label="Submit"
           variant="fab"
           disabled={pristine || submitting}
-          color="primary"
           className={classes.button}
           type="submit"
         ><SaveIcon />

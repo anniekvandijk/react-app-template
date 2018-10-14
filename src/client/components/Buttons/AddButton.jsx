@@ -15,7 +15,7 @@ const styles = theme => ({
 });
 
 const AddButton = (props) => {
-  const { classes, addButtonClick } = props;
+  const { classes, onClick } = props;
   return (
     <CustomTooltip title="Add">
       <Button
@@ -25,7 +25,7 @@ const AddButton = (props) => {
         aria-label="Add"
         className={classes.button}
         type="button"
-        onClick={addButtonClick}
+        onClick={onClick}
       >
         <AddIcon />
       </Button>
@@ -35,7 +35,7 @@ const AddButton = (props) => {
 
 AddButton.propTypes = {
   classes: PropTypes.object.isRequired,
-  addButtonClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(AddButton);

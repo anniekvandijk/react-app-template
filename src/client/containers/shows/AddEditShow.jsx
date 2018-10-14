@@ -12,6 +12,7 @@ import CancelButton from '../../components/Buttons/CancelButton';
 import SubmitButton from '../../components/Buttons/SubmitButton';
 import DeleteButton from '../../components/Buttons/DeleteButton';
 import AddButton from '../../components/Buttons/AddButton';
+import OkButton from '../../components/Buttons/OkButton';
 import createId from '../../utilities/createId';
 import {
   createRecord, updateRecord, unsetUpdateRecord, deleteRecord, showformOpen
@@ -88,10 +89,10 @@ class AddEditShow extends React.PureComponent {
           </DialogContent>
           <DialogActions>
             <CancelButton
-              cancelButtonClick={() => cancelDelete()}
+              onClick={() => cancelDelete()}
             />
-            <DeleteButton
-              deleteButtonClick={() => deleteShow()}
+            <OkButton
+              onClick={() => deleteShow()}
             />
           </DialogActions>
         </Dialog>
@@ -119,19 +120,19 @@ class AddEditShow extends React.PureComponent {
             </DialogContent>
             <DialogActions>
               <CancelButton
-                cancelButtonClick={() => cancel()}
+                onClick={() => cancel()}
               />
               <SubmitButton
                 pristine={pristine}
                 submitting={submitting}
               />
               { initialValues !== null
-                && <DeleteButton deleteButtonClick={() => { this.setState({ deleteDialogOpen: true }); }} />
+                && <DeleteButton onClick={() => { this.setState({ deleteDialogOpen: true }); }} />
               }
             </DialogActions>
           </form>
         </Dialog>
-        <AddButton addButtonClick={() => setFormOpen(true)} />
+        <AddButton onClick={() => setFormOpen(true)} />
       </div>
     );
   }
