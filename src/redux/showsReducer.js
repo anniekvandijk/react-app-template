@@ -27,13 +27,11 @@ const updateRecord = createAction(actionType.UPDATE_RECORD);
 const setUpdateRecord = createAction(actionType.SET_UPDATE_RECORD);
 const unsetUpdateRecord = createAction(actionType.UNSET_UPDATE_RECORD);
 
-const readRecords = (path) => {
-  return (dispatch) => {
-    dispatch(apiCallStarted());
-    Api.get(path)
-      .then(shows => dispatch(apiSuccess(shows)))
-      .catch(error => dispatch(apiError(error)));
-  };
+const readRecords = path => (dispatch) => {
+  dispatch(apiCallStarted());
+  Api.get(path)
+    .then(shows => dispatch(apiSuccess(shows)))
+    .catch(error => dispatch(apiError(error)));
 };
 
 const showsReducer = (state = initialState, action) => {
