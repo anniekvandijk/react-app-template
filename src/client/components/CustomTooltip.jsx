@@ -5,7 +5,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import Zoom from '@material-ui/core/Zoom';
 
 const styles = theme => ({
-  lightTooltip: {
+  tooltip: {
     background: theme.palette.common.white,
     color: theme.palette.text.primary,
     boxShadow: theme.shadows[1],
@@ -17,12 +17,13 @@ const CustomTooltip = (props) => {
   const { classes, children, title } = props;
   return (
     <Tooltip
+      id="tooltip"
       title={title}
       enterDelay={100}
       leaveDelay={100}
       disableFocusListener
       TransitionComponent={Zoom}
-      classes={{ tooltip: classes.lightTooltip }}
+      classes={{ tooltip: classes.tooltip }}
     >
       {children}
     </Tooltip>

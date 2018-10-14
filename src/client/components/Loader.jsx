@@ -12,9 +12,11 @@ const styles = theme => ({
 const Loader = (props) => {
   const { classes } = props;
   return (
-    <CircularProgress className={classes.progress} color="secondary" thickness={7} />
+    <div id="loader">
+      <CircularProgress className={classes.progress} color="secondary" thickness={6} />
+    </div>
   );
-}
+};
 
 Loader.propTypes = {
   classes: PropTypes.object.isRequired

@@ -14,17 +14,17 @@ const AlertDialog = (props) => {
   } = props;
   return (
     <Dialog
-      id="delete-dialog"
+      id="alert-dialog"
       open={alertDialogOpen}
-      aria-labelledby="delete-dialog-title"
+      aria-labelledby="alert-dialog-title"
     >
-      <DialogTitle id="delete-dialog-title">{title}</DialogTitle>
+      <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
       <DialogContent>
-        <DialogContentText id="alert-dialog-description">
+        <DialogContentText id="alert-dialog-content">
           {children}
         </DialogContentText>
       </DialogContent>
-      <DialogActions>
+      <DialogActions id="alert-dialog-actions">
         <CancelButton
           onClick={handleCancelClick}
         />
