@@ -4,8 +4,7 @@ import Api from '../client/api/Api';
 const initialState = {
   shows: null,
   updateShow: null,
-  activeShow: null,
-  showformOpen: false
+  activeShow: null
 };
 
 const actionType = {
@@ -15,8 +14,7 @@ const actionType = {
   DELETE_RECORD: 'DELETE_RECORD',
   UPDATE_RECORD: 'UPDATE_RECORD',
   UNSET_UPDATE_RECORD: 'UNSET_UPDATE_RECORD',
-  SET_UPDATE_RECORD: 'SET_UPDATE_RECORD',
-  SHOWFORM_OPEN: 'SHOWFORM_OPEN'
+  SET_UPDATE_RECORD: 'SET_UPDATE_RECORD'
 };
 
 const apiSuccess = createAction(actionType.API_SUCCESS);
@@ -26,7 +24,6 @@ const deleteRecord = createAction(actionType.DELETE_RECORD);
 const updateRecord = createAction(actionType.UPDATE_RECORD);
 const setUpdateRecord = createAction(actionType.SET_UPDATE_RECORD);
 const unsetUpdateRecord = createAction(actionType.UNSET_UPDATE_RECORD);
-const showformOpen = createAction(actionType.SHOWFORM_OPEN);
 
 function readRecords(path) {
   return function action(dispatch) {
@@ -38,11 +35,6 @@ function readRecords(path) {
 
 const showsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionType.SHOWFORM_OPEN:
-      return {
-        ...state,
-        showformOpen: action.payload
-      };
     case actionType.CREATE_RECORD:
       return {
         ...state,
@@ -84,6 +76,5 @@ export {
   deleteRecord,
   setUpdateRecord,
   updateRecord,
-  unsetUpdateRecord,
-  showformOpen
+  unsetUpdateRecord
 };

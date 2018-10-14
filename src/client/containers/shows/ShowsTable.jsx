@@ -8,7 +8,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { connect } from 'react-redux';
-import { readRecords, setUpdateRecord, showformOpen } from '../../../redux/showsReducer';
+import { readRecords, setUpdateRecord } from '../../../redux/showsReducer';
 import EditButton from '../../components/Buttons/EditButton';
 import Loader from '../../components/Loader';
 
@@ -33,7 +33,7 @@ class ShowsTable extends React.PureComponent {
 
   render() {
     const {
-      classes, shows, setRecordToUpdate, setShowformOpen
+      classes, shows, setRecordToUpdate, setShowFormOpen
     } = this.props;
     if (shows === null) {
       return (
@@ -42,7 +42,7 @@ class ShowsTable extends React.PureComponent {
     }
     const editShow = (id) => {
       setRecordToUpdate(id);
-      setShowformOpen(true);
+      setShowFormOpen(true);
     };
     return (
       <Paper className={classes.root}>
@@ -77,7 +77,7 @@ ShowsTable.propTypes = {
   loadData: PropTypes.func.isRequired,
   setRecordToUpdate: PropTypes.func.isRequired,
   shows: PropTypes.array,
-  setShowformOpen: PropTypes.func.isRequired
+  setShowFormOpen: PropTypes.func.isRequired
 };
 
 ShowsTable.defaultProps = {
@@ -90,8 +90,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   loadData: () => dispatch(readRecords('/api/shows')),
-  setRecordToUpdate: id => dispatch(setUpdateRecord(id)),
-  setShowformOpen: open => dispatch(showformOpen(open))
+  setRecordToUpdate: id => dispatch(setUpdateRecord(id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ShowsTable));

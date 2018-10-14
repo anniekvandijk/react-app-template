@@ -15,7 +15,7 @@ import AddButton from '../../components/Buttons/AddButton';
 import OkButton from '../../components/Buttons/OkButton';
 import createId from '../../utilities/createId';
 import {
-  createRecord, updateRecord, unsetUpdateRecord, deleteRecord, showformOpen
+  createRecord, updateRecord, unsetUpdateRecord, deleteRecord
 } from '../../../redux/showsReducer';
 
 class AddEditShow extends React.PureComponent {
@@ -23,9 +23,11 @@ class AddEditShow extends React.PureComponent {
 
   render() {
     const {
-      setAlertDialogOpen, handleSubmit, pristine, reset, submitting, recordUpdate,
-      recordAdd, clearUpdateRecord, recordDelete, initialValues, setFormOpen, formIsOpen
+      handleSubmit, pristine, reset, submitting, recordUpdate,
+      recordAdd, clearUpdateRecord, recordDelete, initialValues, setShowFormOpen,
+      showFormIsOpen
     } = this.props;
+    const { deleteDialogOpen } = this.state;
     const header = initialValues === null ? 'Add show' : 'Edit show';
     const addEditShow = (formValues) => {
       // update record
@@ -36,22 +38,29 @@ class AddEditShow extends React.PureComponent {
         clearUpdateRecord(initialValues.id);
       } else {
       // add record
-        formValues.id = createId();
-        console.log('add');
-        console.log(formValues);
-        recordAdd(formValues);
+        const newValue = formValues;
+        newValue.id = createId();
+        console.log('add record');
+        console.log(newValue);
+        recordAdd(newValue);
       }
-      setFormOpen(false);
+      setShowFormOpen(false);
       reset();
+    };
+    const addShow = () => {
+      if (initialValues !== null) {
+        clearUpdateRecord(initialValues.id);
+      }
+      setShowFormOpen(true);
     };
     const deleteShow = () => {
       if (initialValues !== null) {
-        console.log('delete');
+        console.log('delete record');
         console.log(initialValues.id);
         recordDelete(initialValues.id);
         clearUpdateRecord(initialValues.id);
         this.setState({ deleteDialogOpen: false });
-        setFormOpen(false);
+        setShowFormOpen(false);
         reset();
       }
     };
@@ -65,14 +74,14 @@ class AddEditShow extends React.PureComponent {
         console.log(initialValues.id);
         clearUpdateRecord(initialValues.id);
       }
-      setFormOpen(false);
+      setShowFormOpen(false);
       reset();
     };
     return (
       <div id="showform">
         <Dialog
           id="delete-dialog"
-          open={this.state.deleteDialogOpen}
+          open={deleteDialogOpen}
           aria-labelledby="delete-dialog-title"
         >
           <DialogTitle id="delete-dialog-title">Delete</DialogTitle>
@@ -98,7 +107,7 @@ class AddEditShow extends React.PureComponent {
         </Dialog>
         <Dialog
           id="showform-dialog"
-          open={formIsOpen}
+          open={showFormIsOpen}
           aria-labelledby="showform-dialog-title"
         >
           <DialogTitle id="showform-dialog-title">{header}</DialogTitle>
@@ -120,9 +129,6 @@ class AddEditShow extends React.PureComponent {
             </DialogContent>
             <DialogActions>
               <CancelButton
-                onClick={setAlertDialogOpen}
-              />
-              <CancelButton
                 onClick={() => cancel()}
               />
               <SubmitButton
@@ -135,7 +141,7 @@ class AddEditShow extends React.PureComponent {
             </DialogActions>
           </form>
         </Dialog>
-        <AddButton onClick={() => setFormOpen(true)} />
+        <AddButton onClick={() => addShow()} />
       </div>
     );
   }
@@ -151,29 +157,26 @@ AddEditShow.propTypes = {
   clearUpdateRecord: PropTypes.func.isRequired,
   recordDelete: PropTypes.func.isRequired,
   initialValues: PropTypes.object,
-  setFormOpen: PropTypes.func.isRequired,
-  formIsOpen: PropTypes.bool,
-  setAlertDialogOpen: PropTypes.func.isRequired
+  setShowFormOpen: PropTypes.func.isRequired,
+  showFormIsOpen: PropTypes.bool
 };
 
 AddEditShow.defaultProps = {
   pristine: true,
   submitting: false,
   initialValues: null,
-  formIsOpen: false
+  showFormIsOpen: false
 };
 
 const mapStateToProps = state => ({
-  initialValues: state.shows.updateShow,
-  formIsOpen: state.shows.showformOpen
+  initialValues: state.shows.updateShow
 });
 
 const mapDispatchToProps = dispatch => ({
   recordUpdate: show => dispatch(updateRecord(show)),
   recordAdd: show => dispatch(createRecord(show)),
   recordDelete: showId => dispatch(deleteRecord(showId)),
-  clearUpdateRecord: showId => dispatch(unsetUpdateRecord(showId)),
-  setFormOpen: open => dispatch(showformOpen(open))
+  clearUpdateRecord: showId => dispatch(unsetUpdateRecord(showId))
 });
 
 const config = {

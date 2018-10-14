@@ -1,44 +1,26 @@
 import React from 'react';
 import AddEditShow from './AddEditShow';
 import ShowsTable from './ShowsTable';
-import AlertDialog from '../../components/dialogs/AlertDialog';
 
 class ShowsContainer extends React.PureComponent {
   state = {
-    alertDialogOpen: false,
-    formDialogOpen: false
+    showFormIsOpen: false
   };
 
   render() {
-    const handle = () => {
-      this.setState({ alertDialogOpen: false });
-    };
-    const alertDialogOpen = () => {
-      this.setState({ alertDialogOpen: true });
-    };
-    const AlertDialogCancel = () => {
-      this.setState({ alertDialogOpen: false });
-    };
-    const formDialogOpen = () => {
-      this.setState({ formDialogOpen: true });
-    };
-    const formDialogCancel = () => {
-      this.setState({ formDialogOpen: false });    
+    const { showFormIsOpen } = this.state;
+    const isShowFormOpen = (bool) => {
+      this.setState({ showFormIsOpen: bool });
     };
     return (
       <div id="showscontainer">
-        <AlertDialog
-          title="Hello"
-          alertDialogOpen={this.state.alertDialogOpen}
-          handleOkClick={handle}
-          handleCancelClick={AlertDialogCancel}
-        >
-          Hello
-        </AlertDialog>
         <AddEditShow
-          setAlertDialogOpen={alertDialogOpen}
+          setShowFormOpen={isShowFormOpen}
+          showFormIsOpen={showFormIsOpen}
         />
-        <ShowsTable />
+        <ShowsTable
+          setShowFormOpen={isShowFormOpen}
+        />
       </div>
     );
   }
