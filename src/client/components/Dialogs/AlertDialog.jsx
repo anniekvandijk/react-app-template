@@ -20,7 +20,7 @@ const AlertDialog = (props) => {
     >
       <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
       <DialogContent>
-        <DialogContentText id="alert-dialog-description">
+        <DialogContentText component="div" id="alert-dialog-description">
           {children}
         </DialogContentText>
       </DialogContent>
@@ -39,7 +39,10 @@ const AlertDialog = (props) => {
 AlertDialog.propTypes = {
   handleCancelClick: PropTypes.func.isRequired,
   handleOkClick: PropTypes.func.isRequired,
-  children: PropTypes.object.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.array
+  ]).isRequired,
   title: PropTypes.string.isRequired,
   alertDialogOpen: PropTypes.bool
 };

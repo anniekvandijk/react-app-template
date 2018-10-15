@@ -6,21 +6,20 @@ import { reduxForm, Field } from 'redux-form';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogActions from '@material-ui/core/DialogActions';
+import AlertDialog from '../../components/Dialogs/AlertDialog';
 import RenderedTextField from '../../components/FormFields/TextField';
 import CancelButton from '../../components/Buttons/CancelButton';
 import SubmitButton from '../../components/Buttons/SubmitButton';
 import DeleteButton from '../../components/Buttons/DeleteButton';
 import AddButton from '../../components/Buttons/AddButton';
-import OkButton from '../../components/Buttons/OkButton';
 import createId from '../../utilities/createId';
 import {
   createRecord, updateRecord, unsetUpdateRecord, deleteRecord
 } from '../../../redux/showsReducer';
 
 class AddEditShow extends React.PureComponent {
-  state = { deleteDialogOpen: false };
+  state = { alertDialogOpen: false };
 
   render() {
     const {
@@ -28,7 +27,7 @@ class AddEditShow extends React.PureComponent {
       recordAdd, clearUpdateRecord, recordDelete, initialValues, setShowFormOpen,
       showFormIsOpen
     } = this.props;
-    const { deleteDialogOpen } = this.state;
+    const { alertDialogOpen } = this.state;
     const header = initialValues === null ? 'Add show' : 'Edit show';
     const addEditShow = (formValues) => {
       // update record
@@ -60,14 +59,14 @@ class AddEditShow extends React.PureComponent {
         console.log(initialValues.id);
         recordDelete(initialValues.id);
         clearUpdateRecord(initialValues.id);
-        this.setState({ deleteDialogOpen: false });
+        this.setState({ alertDialogOpen: false });
         setShowFormOpen(false);
         reset();
       }
     };
     const cancelDelete = () => {
       console.log('cancel delete');
-      this.setState({ deleteDialogOpen: false });
+      this.setState({ alertDialogOpen: false });
     };
     const cancel = () => {
       console.log('cancel');
@@ -80,36 +79,24 @@ class AddEditShow extends React.PureComponent {
     };
     return (
       <div id="shows-form">
-        <Dialog
-          id="shows-form-delete-dialog"
-          open={deleteDialogOpen}
-          aria-labelledby="shows-form-delete-dialog-title"
+        <AlertDialog
+          title="Delete"
+          alertDialogOpen={alertDialogOpen}
+          handleOkClick={() => deleteShow()}
+          handleCancelClick={() => cancelDelete()}
         >
-          <DialogTitle id="shows-form-delete-dialog-title">Delete</DialogTitle>
-          <DialogContent>
-            <DialogContentText component="div" id="shows-form-delete-dialog-description">
-              <Typography variant="body1" gutterBottom>
-                Are you sure you want to delete this show?
-              </Typography>
-              { initialValues !== null
-                && (
-                <Typography variant="title" gutterBottom>
-                  {initialValues.name}
-                  <br />
-                  {initialValues.location}
-                </Typography>)
-              }
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions id="shows-form-delete-dialog-actions">
-            <CancelButton
-              onClick={() => cancelDelete()}
-            />
-            <OkButton
-              onClick={() => deleteShow()}
-            />
-          </DialogActions>
-        </Dialog>
+          <Typography variant="body1" gutterBottom>
+            Are you sure you want to delete this show?
+          </Typography>
+          { initialValues !== null
+            && (
+            <Typography variant="title" gutterBottom>
+              {initialValues.name}
+              <br />
+              {initialValues.location}
+            </Typography>)
+          }
+        </AlertDialog>
         <Dialog
           id="shows-form-dialog"
           open={showFormIsOpen}
@@ -141,7 +128,7 @@ class AddEditShow extends React.PureComponent {
                 submitting={submitting}
               />
               { initialValues !== null
-                && <DeleteButton onClick={() => { this.setState({ deleteDialogOpen: true }); }} />
+                && <DeleteButton onClick={() => { this.setState({ alertDialogOpen: true }); }} />
               }
             </DialogActions>
           </form>
