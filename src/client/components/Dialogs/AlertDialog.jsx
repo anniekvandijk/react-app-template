@@ -3,14 +3,13 @@ import PropTypes from 'prop-types';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogActions from '@material-ui/core/DialogActions';
 import CancelButton from '../Buttons/CancelButton';
 import OkButton from '../Buttons/OkButton';
 
 const AlertDialog = (props) => {
   const {
-    alertDialogOpen, handleOkClick, handleCancelClick, title, children
+    alertDialogOpen, handleAlertDialogOkClick, handleAlertDialogCancelClick, title, children
   } = props;
   return (
     <Dialog
@@ -19,17 +18,15 @@ const AlertDialog = (props) => {
       aria-labelledby="alert-dialog-title"
     >
       <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
-      <DialogContent>
-        <DialogContentText component="div" id="alert-dialog-description">
-          {children}
-        </DialogContentText>
+      <DialogContent id="alert-dialog-content">
+        {children}
       </DialogContent>
       <DialogActions id="alert-dialog-actions">
         <CancelButton
-          onClick={handleCancelClick}
+          onClick={handleAlertDialogCancelClick}
         />
         <OkButton
-          onClick={handleOkClick}
+          onClick={handleAlertDialogOkClick}
         />
       </DialogActions>
     </Dialog>
@@ -37,8 +34,8 @@ const AlertDialog = (props) => {
 };
 
 AlertDialog.propTypes = {
-  handleCancelClick: PropTypes.func.isRequired,
-  handleOkClick: PropTypes.func.isRequired,
+  handleAlertDialogCancelClick: PropTypes.func.isRequired,
+  handleAlertDialogOkClick: PropTypes.func.isRequired,
   children: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.array

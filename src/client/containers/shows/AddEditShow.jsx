@@ -7,6 +7,7 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogActions from '@material-ui/core/DialogActions';
+import DialogContentText from '@material-ui/core/DialogContentText';
 import AlertDialog from '../../components/Dialogs/AlertDialog';
 import RenderedTextField from '../../components/FormFields/TextField';
 import CancelButton from '../../components/Buttons/CancelButton';
@@ -82,20 +83,22 @@ class AddEditShow extends React.PureComponent {
         <AlertDialog
           title="Delete"
           alertDialogOpen={alertDialogOpen}
-          handleOkClick={() => deleteShow()}
-          handleCancelClick={() => cancelDelete()}
+          handleAlertDialogOkClick={() => deleteShow()}
+          handleAlertDialogCancelClick={() => cancelDelete()}
         >
-          <Typography variant="body1" gutterBottom>
-            Are you sure you want to delete this show?
-          </Typography>
-          { initialValues !== null
-            && (
-            <Typography variant="title" gutterBottom>
-              {initialValues.name}
-              <br />
-              {initialValues.location}
-            </Typography>)
-          }
+          <DialogContentText component="div">
+            <Typography variant="body1" gutterBottom>
+              Are you sure you want to delete this show?
+            </Typography>
+            { initialValues !== null
+              && (
+              <Typography variant="title" gutterBottom>
+                {initialValues.name}
+                <br />
+                {initialValues.location}
+              </Typography>)
+            }
+          </DialogContentText>
         </AlertDialog>
         <Dialog
           id="shows-form-dialog"
