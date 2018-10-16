@@ -11,18 +11,24 @@ import DeleteButton from '../Buttons/DeleteButton';
 
 const FormDialog = (props) => {
   const {
-    header, children, handleSubmit, pristine, reset, submitting, initialValues,
-    formIsOpen, handleFormDialogSubmitClick, handleFormDialogCancelClick,
+    header, children, handleSubmit, pristine, submitting, initialValues,
+    formDialogOpen, handleFormDialogSubmitClick, handleFormDialogCancelClick,
     handleFormDialogDeleteClick
   } = props;
+
+  const submit = (formValues) => {
+    console.log(formValues);
+    handleFormDialogSubmitClick();
+  };
+
   return (
     <Dialog
       id="form-dialog"
-      open={formIsOpen}
+      open={formDialogOpen}
       aria-labelledby="form-dialog-title"
     >
       <DialogTitle id="form-dialog-title">{header}</DialogTitle>
-      <form onSubmit={handleSubmit(handleFormDialogSubmitClick)}>
+      <form onSubmit={handleSubmit(submit)}>
         <DialogContent id="form-dialog-description">
           {children}
         </DialogContent>
@@ -51,10 +57,9 @@ FormDialog.propTypes = {
   handleFormDialogCancelClick: PropTypes.func.isRequired,
   handleFormDialogDeleteClick: PropTypes.func.isRequired,
   pristine: PropTypes.bool,
-  reset: PropTypes.func.isRequired,
   submitting: PropTypes.bool,
   initialValues: PropTypes.object,
-  formIsOpen: PropTypes.bool,
+  formDialogOpen: PropTypes.bool,
   children: PropTypes.oneOfType([
     PropTypes.object,
     PropTypes.array
@@ -65,7 +70,7 @@ FormDialog.defaultProps = {
   pristine: true,
   submitting: false,
   initialValues: null,
-  formIsOpen: false
+  formDialogOpen: false
 };
 
 const config = {
