@@ -23,14 +23,15 @@ const styles = theme => ({
 });
 
 const DefaultTable = (props) => {
-  const { classes, data, tableHeaders, shownDataValues, handleTableEditClick } = props;
+  const {
+    classes, data, tableHeaders, shownDataValues, handleTableEditClick
+  } = props;
   if (data === null) {
     return (
       <Loader />
     );
   }
-  if (tableHeaders.lenght !== shownDataValues.lenght)
-  {
+  if (tableHeaders.lenght !== shownDataValues.lenght) {
     throw new Error('headers and shown values not equal');
   }
 
@@ -57,9 +58,12 @@ const DefaultTable = (props) => {
                 <EditButton onClick={() => editAction(d.id)} />
               </TableCell>
               {Object.keys(d).map((key) => {
-                return (
-                  <TableCell key={d + key}>{d[key]}</TableCell>
-                );
+                if (shownDataValues.includes(key)) {
+                  return (
+                    <TableCell key={d.id + d[key]}>{d[key]}</TableCell>
+                  );
+                }
+                return null;
               })}
             </TableRow>
           ))

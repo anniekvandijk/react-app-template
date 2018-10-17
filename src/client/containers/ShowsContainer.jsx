@@ -75,7 +75,6 @@ class ShowsContainer extends React.PureComponent {
 
     const cancelForm = () => {
       if (initialValues !== null) {
-        console.log(initialValues.id);
         clearUpdateRecord(initialValues.id);
       }
       this.setState({ formDialogOpen: false });
