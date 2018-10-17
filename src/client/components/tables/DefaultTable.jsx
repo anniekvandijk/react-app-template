@@ -56,11 +56,9 @@ const DefaultTable = (props) => {
               <TableCell>
                 <EditButton onClick={() => editAction(d.id)} />
               </TableCell>
-              {console.log(Object.keys(d))}
-              {Object.values(d).map((value) => {
-                console.log(value);
+              {Object.keys(d).map((key) => {
                 return (
-                  <TableCell key={d + value}>{value}</TableCell>
+                  <TableCell key={d + key}>{d[key]}</TableCell>
                 );
               })}
             </TableRow>
