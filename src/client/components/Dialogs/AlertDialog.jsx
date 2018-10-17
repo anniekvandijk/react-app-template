@@ -4,8 +4,8 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogActions from '@material-ui/core/DialogActions';
-import CancelButton from '../Buttons/CancelButton';
-import OkButton from '../Buttons/OkButton';
+import CancelButton from '../buttons/CancelButton';
+import OkButton from '../buttons/OkButton';
 
 const AlertDialog = (props) => {
   const {

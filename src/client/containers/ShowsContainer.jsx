@@ -4,14 +4,14 @@ import Typography from '@material-ui/core/Typography';
 import { connect } from 'react-redux';
 import { Field } from 'redux-form';
 import DialogContentText from '@material-ui/core/DialogContentText';
-import FormDialog from '../../components/Dialogs/FormDialog';
-import AlertDialog from '../../components/Dialogs/AlertDialog';
-import DefaultTable from '../../components/tables/DefaultTable';
-import RenderedTextField from '../../components/FormFields/TextField';
-import AddButton from '../../components/Buttons/AddButton';
+import FormDialog from '../components/dialogs/FormDialog';
+import AlertDialog from '../components/dialogs/AlertDialog';
+import DefaultTable from '../components/tables/DefaultTable';
+import RenderedTextField from '../components/formFields/TextField';
+import AddButton from '../components/buttons/AddButton';
 import {
   createRecord, updateRecord, unsetUpdateRecord, deleteRecord, readRecords, setUpdateRecord
-} from '../../../redux/showsReducer';
+} from '../../redux/showsReducer';
 
 class ShowsContainer extends React.PureComponent {
   state = {
@@ -20,7 +20,6 @@ class ShowsContainer extends React.PureComponent {
   };
 
   componentWillMount() {
-    console.log('mounted');
     const { loadData } = this.props;
     loadData();
   }
@@ -34,17 +33,12 @@ class ShowsContainer extends React.PureComponent {
     const header = initialValues === null ? 'Add show' : 'Edit show';
 
     const submitShow = (formValues) => {
-      console.log(formValues);
       // update record
       if (initialValues !== null) {
-        console.log('update record');
-        console.log(formValues);
         recordUpdate(formValues);
         clearUpdateRecord(initialValues.id);
       } else {
       // add record
-        console.log('add record');
-        console.log(formValues);
         recordAdd(formValues);
       }
       this.setState({ formDialogOpen: false });
@@ -68,8 +62,6 @@ class ShowsContainer extends React.PureComponent {
 
     const deleteShow = () => {
       if (initialValues !== null) {
-        console.log('delete record');
-        console.log(initialValues.id);
         recordDelete(initialValues.id);
         clearUpdateRecord(initialValues.id);
         this.setState({ alertDialogOpen: false });
@@ -78,12 +70,10 @@ class ShowsContainer extends React.PureComponent {
     };
 
     const cancelDelete = () => {
-      console.log('cancel delete');
       this.setState({ alertDialogOpen: false });
     };
 
     const cancelForm = () => {
-      console.log('cancel');
       if (initialValues !== null) {
         console.log(initialValues.id);
         clearUpdateRecord(initialValues.id);
@@ -136,6 +126,8 @@ class ShowsContainer extends React.PureComponent {
         <AddButton onClick={addShow} />
         <DefaultTable
           data={shows}
+          tableHeaders={(['Name', 'Location'])}
+          shownDataValues={(['name', 'location'])}
           handleTableEditClick={id => editShow(id)}
         />
       </div>

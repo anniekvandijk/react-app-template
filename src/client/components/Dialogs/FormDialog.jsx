@@ -5,9 +5,9 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogActions from '@material-ui/core/DialogActions';
-import CancelButton from '../Buttons/CancelButton';
-import SubmitButton from '../Buttons/SubmitButton';
-import DeleteButton from '../Buttons/DeleteButton';
+import CancelButton from '../buttons/CancelButton';
+import SubmitButton from '../buttons/SubmitButton';
+import DeleteButton from '../buttons/DeleteButton';
 import createId from '../../utilities/createId';
 
 const FormDialog = (props) => {
