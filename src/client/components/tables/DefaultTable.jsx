@@ -31,7 +31,7 @@ const DefaultTable = (props) => {
       <Loader />
     );
   }
-  if (tableHeaders.lenght !== shownDataValues.lenght) {
+  if (tableHeaders.length !== shownDataValues.length) {
     throw new Error('headers and shown values not equal');
   }
 

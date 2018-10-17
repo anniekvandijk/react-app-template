@@ -122,13 +122,13 @@ class ShowsContainer extends React.PureComponent {
             component={RenderedTextField}
           />
         </FormDialog>
-        <AddButton onClick={addShow} />
         <DefaultTable
           data={shows}
-          tableHeaders={(['Name', 'Location'])}
-          shownDataValues={(['name', 'location'])}
+          tableHeaders={(['Name', 'Date', 'Location'])}
+          shownDataValues={(['name', 'location', 'date'])}
           handleTableEditClick={id => editShow(id)}
         />
+        <AddButton onClick={addShow} />
       </div>
     );
   }
