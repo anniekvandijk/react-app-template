@@ -8,17 +8,34 @@ import DialogActions from '@material-ui/core/DialogActions';
 import CancelButton from '../Buttons/CancelButton';
 import SubmitButton from '../Buttons/SubmitButton';
 import DeleteButton from '../Buttons/DeleteButton';
+import createId from '../../utilities/createId';
 
 const FormDialog = (props) => {
   const {
-    header, children, handleSubmit, pristine, submitting, initialValues,
+    header, reset, children, handleSubmit, pristine, submitting, initialValues,
     formDialogOpen, handleFormDialogSubmitClick, handleFormDialogCancelClick,
     handleFormDialogDeleteClick
   } = props;
 
-  const submit = (formValues) => {
-    console.log(formValues);
-    handleFormDialogSubmitClick();
+  const submitAction = (formValues) => {
+    if (initialValues === null) {
+      const newRecord = formValues;
+      newRecord.id = createId();
+      handleFormDialogSubmitClick(newRecord);
+    } else {
+      handleFormDialogSubmitClick(formValues);
+    }
+    reset();
+  };
+
+  const deleteAction = () => {
+    handleFormDialogDeleteClick();
+    reset();
+  };
+
+  const cancelAction = () => {
+    handleFormDialogCancelClick();
+    reset();
   };
 
   return (
@@ -28,20 +45,20 @@ const FormDialog = (props) => {
       aria-labelledby="form-dialog-title"
     >
       <DialogTitle id="form-dialog-title">{header}</DialogTitle>
-      <form onSubmit={handleSubmit(submit)}>
+      <form onSubmit={handleSubmit(submitAction)}>
         <DialogContent id="form-dialog-description">
           {children}
         </DialogContent>
         <DialogActions id="form-dialog-actions">
           <CancelButton
-            onClick={handleFormDialogCancelClick}
+            onClick={cancelAction}
           />
           <SubmitButton
             pristine={pristine}
             submitting={submitting}
           />
           { initialValues !== null
-            && <DeleteButton onClick={handleFormDialogDeleteClick} />
+            && <DeleteButton onClick={deleteAction} />
           }
         </DialogActions>
       </form>
@@ -53,6 +70,7 @@ const FormDialog = (props) => {
 FormDialog.propTypes = {
   header: PropTypes.string.isRequired,
   handleSubmit: PropTypes.func.isRequired,
+  reset: PropTypes.func.isRequired,
   handleFormDialogSubmitClick: PropTypes.func.isRequired,
   handleFormDialogCancelClick: PropTypes.func.isRequired,
   handleFormDialogDeleteClick: PropTypes.func.isRequired,

@@ -6,11 +6,11 @@ import { Field } from 'redux-form';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import FormDialog from '../../components/Dialogs/FormDialog';
 import AlertDialog from '../../components/Dialogs/AlertDialog';
+import DefaultTable from '../../components/tables/DefaultTable';
 import RenderedTextField from '../../components/FormFields/TextField';
 import AddButton from '../../components/Buttons/AddButton';
-import createId from '../../utilities/createId';
 import {
-  createRecord, updateRecord, unsetUpdateRecord, deleteRecord
+  createRecord, updateRecord, unsetUpdateRecord, deleteRecord, readRecords, setUpdateRecord
 } from '../../../redux/showsReducer';
 
 class ShowsContainer extends React.PureComponent {
@@ -19,13 +19,21 @@ class ShowsContainer extends React.PureComponent {
     formDialogOpen: false
   };
 
+  componentWillMount() {
+    console.log('mounted');
+    const { loadData } = this.props;
+    loadData();
+  }
+
   render() {
     const {
-      recordUpdate, recordAdd, clearUpdateRecord, recordDelete, initialValues
+      shows, recordUpdate, recordAdd, clearUpdateRecord,
+      setRecordToUpdate, recordDelete, initialValues
     } = this.props;
     const { alertDialogOpen, formDialogOpen } = this.state;
     const header = initialValues === null ? 'Add show' : 'Edit show';
-    const addEditShow = (formValues) => {
+
+    const submitShow = (formValues) => {
       console.log(formValues);
       // update record
       if (initialValues !== null) {
@@ -35,23 +43,29 @@ class ShowsContainer extends React.PureComponent {
         clearUpdateRecord(initialValues.id);
       } else {
       // add record
-        const newValue = formValues;
-        newValue.id = createId();
         console.log('add record');
-        console.log(newValue);
-        recordAdd(newValue);
+        console.log(formValues);
+        recordAdd(formValues);
       }
       this.setState({ formDialogOpen: false });
     };
+
     const addShow = () => {
       if (initialValues !== null) {
         clearUpdateRecord(initialValues.id);
       }
       this.setState({ formDialogOpen: true });
     };
+
+    const editShow = (id) => {
+      setRecordToUpdate(id);
+      this.setState({ formDialogOpen: true });
+    };
+
     const formDeleteClick = () => {
       this.setState({ alertDialogOpen: true });
     };
+
     const deleteShow = () => {
       if (initialValues !== null) {
         console.log('delete record');
@@ -62,10 +76,12 @@ class ShowsContainer extends React.PureComponent {
         this.setState({ formDialogOpen: false });
       }
     };
+
     const cancelDelete = () => {
       console.log('cancel delete');
       this.setState({ alertDialogOpen: false });
     };
+
     const cancelForm = () => {
       console.log('cancel');
       if (initialValues !== null) {
@@ -74,6 +90,7 @@ class ShowsContainer extends React.PureComponent {
       }
       this.setState({ formDialogOpen: false });
     };
+
     return (
       <div id="shows-form">
         <AlertDialog
@@ -99,9 +116,10 @@ class ShowsContainer extends React.PureComponent {
         <FormDialog
           header={header}
           formDialogOpen={formDialogOpen}
-          handleFormDialogSubmitClick={values => addEditShow(values)}
-          handleFormDialogCancelClick={() => cancelForm()}
-          handleFormDialogDeleteClick={() => formDeleteClick()}
+          initialValues={initialValues}
+          handleFormDialogSubmitClick={values => submitShow(values)}
+          handleFormDialogCancelClick={cancelForm}
+          handleFormDialogDeleteClick={formDeleteClick}
         >
           <Field
             name="name"
@@ -115,7 +133,11 @@ class ShowsContainer extends React.PureComponent {
             component={RenderedTextField}
           />
         </FormDialog>
-        <AddButton onClick={() => addShow()} />
+        <AddButton onClick={addShow} />
+        <DefaultTable
+          data={shows}
+          handleTableEditClick={id => editShow(id)}
+        />
       </div>
     );
   }
@@ -123,21 +145,28 @@ class ShowsContainer extends React.PureComponent {
 
 ShowsContainer.propTypes = {
   recordAdd: PropTypes.func.isRequired,
+  loadData: PropTypes.func.isRequired,
+  setRecordToUpdate: PropTypes.func.isRequired,
   recordUpdate: PropTypes.func.isRequired,
   clearUpdateRecord: PropTypes.func.isRequired,
   recordDelete: PropTypes.func.isRequired,
-  initialValues: PropTypes.object
+  initialValues: PropTypes.object,
+  shows: PropTypes.array
 };
 
 ShowsContainer.defaultProps = {
-  initialValues: null
+  initialValues: null,
+  shows: null
 };
 
 const mapStateToProps = state => ({
-  initialValues: state.shows.updateShow
+  initialValues: state.shows.updateShow,
+  shows: state.shows.shows
 });
 
 const mapDispatchToProps = dispatch => ({
+  loadData: () => dispatch(readRecords('/api/shows')),
+  setRecordToUpdate: id => dispatch(setUpdateRecord(id)),
   recordUpdate: show => dispatch(updateRecord(show)),
   recordAdd: show => dispatch(createRecord(show)),
   recordDelete: showId => dispatch(deleteRecord(showId)),
