@@ -3,10 +3,11 @@ import path from 'path';
 import http from 'http';
 
 const app = express();
-const routePath = path.join(__dirname, '..', '..', '..', 'dist/', 'index.html');
+const distDir = path.join(__dirname, '/../../dist');
+const routePath = path.join(distDir, '/index.html');
 
 // Point static path to dist
-app.use(express.static(path.join(__dirname, '..', 'dist')));
+app.use(express.static(distDir));
 
 app.use('/api/shows', (req, res) => {
   res.sendFile(path.join(__dirname, '../../test/mocks/shows.json'));

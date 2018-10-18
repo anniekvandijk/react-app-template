@@ -15,7 +15,8 @@
     "start": "concurrently \"npm run start:dev:server\" \"npm run start:dev:client\"",
     "start:prd:client": "webpack --mode production --config config/webpack.prd.config.js",
     "start:prd:server": "node src/server/start.js",
-    "build": "concurrently \"npm run start:prd:server\" \"npm run start:prd:client\"",
+    "build": "concurrently \"npm run clean:dist clean:dist\" \"npm run start:prd:server\" \"npm run start:prd:client\"",
+    "clean:dist": "rimraf ./dist",
     "test": "jest"
   },
   "jest": {
