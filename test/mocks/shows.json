@@ -2,6 +2,7 @@
   "shows": [
     {
       "id": "584735e7-8fec-4c7b-9f57-32dc323fce68",
+      "activeShow": false,
       "name": "Nationale Alpacashow",
       "date": "01-04-2018",
       "location": "Assen",
@@ -12,6 +13,7 @@
     },
     {
       "id": "d6be5487-6c0d-40f4-8974-b2089d4c8d6b",
+      "activeShow": false,
       "name": "Internationale Alpacashow",
       "date": "05-06-2018",
       "location": "Hapert",
@@ -22,6 +24,7 @@
     },
     {
       "id": "182f1acf-afc3-458b-96e7-01fbeaab7d70",
+      "activeShow": true,
       "name": "Europese Alpacashow",
       "date": "05-06-2019",
       "location": "Boekel",
@@ -31,7 +34,6 @@
       "judgeSigningUrl": "https://localhost:3000/judgesigns/shirley_bettinson.jpg"
     }
   ],
-  "activeShow": null,
   "updateShow": null
 }
 

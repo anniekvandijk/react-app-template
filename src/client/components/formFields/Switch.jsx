@@ -1,26 +1,33 @@
 import React from 'react';
 import Switch from '@material-ui/core/Switch';
+import PropTypes from 'prop-types';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
-class RenderedSwitch extends React.Component {
-  state = {
-    active: false
-  };
 
-  handleChange = name => (event) => {
-    this.setState({ [name]: event.target.checked });
-  };
+const RenderedSwitch = (props) => {
+  const { checked, onChange, label } = props;
+  return (
+    <FormControlLabel
+      control={(
+        <Switch
+          checked={checked}
+          onChange={onChange}
+        />
+        )
+      }
+      label={label}
+    />
+  );
+};
 
-  render() {
-    const { active } = this.state;
-    return (
-      <Switch
-        id="switch"
-        checked={active}
-        onChange={this.handleChange('active')}
-        value="active"
-      />
-    );
-  }
-}
+RenderedSwitch.propTypes = {
+  checked: PropTypes.bool.isRequired,
+  onChange: PropTypes.func.isRequired,
+  label: PropTypes.string
+};
+
+RenderedSwitch.defaultProps = {
+  label: ''
+};
 
 export default RenderedSwitch;
