@@ -11,8 +11,7 @@ import DefaultTable from '../components/tables/DefaultTable';
 import RenderedTextField from '../components/formFields/TextField';
 import AddButton from '../components/buttons/AddButton';
 import {
-  createRecord, updateRecord, unsetUpdateRecord, deleteRecord, readRecords, setUpdateRecord,
-  setActiveRecord, unsetActiveRecord
+  createRecord, updateRecord, unsetUpdateRecord, deleteRecord, readRecords, setUpdateRecord
 } from '../../redux/showsReducer';
 import RenderedSwitch from '../components/formFields/Switch';
 
@@ -88,39 +87,19 @@ class ShowsContainer extends React.PureComponent {
       handle active show
     */
 
-    const handleActiveShow = (show, bool) => {
+    const handleActiveShow = (id, bool) => {
+      console.log('handle this');
       if (bool === true) {
         // set all records on inactive exept selected one
         shows.map((s) => {
-          if (s.id === show.id) {
-            setRecordActive(show.id);
+          if (s.id === id) {
+            setRecordActive(id);
           } else {
-            unsetRecordActive(show.id);
+            unsetRecordActive(id);
           }
         });
       }
     };
-
-    if (shows !== null) {
-      shows.map((show) => {
-        if (show.activeShow === true) {
-          show.active = (
-            <RenderedSwitch
-              checked={true}
-              disabled
-              onChange={() => handleActiveShow(show, false)}
-            />
-          );
-        } else {
-          show.active = (
-            <RenderedSwitch
-              checked={false}
-              onChange={() => handleActiveShow(show, true)}
-            />
-          );
-        }
-      });
-    }
 
     return (
       <div id="showscontainer">
@@ -163,13 +142,23 @@ class ShowsContainer extends React.PureComponent {
             label="Show Location"
             component={RenderedTextField}
           />
+          <RenderedSwitch
+            name="activeShow"
+            label="Show active"
+            checked={initialValues !== null && initialValues.activeShow}
+            onChange={id => handleActiveShow(id, false)}
+          />
         </FormDialog>
         <DefaultTable
           data={shows}
           tableHeaders={(['Active', 'Name', 'Date', 'Location'])}
-          shownDataValues={(['active', 'name', 'location', 'date'])}
+          shownDataValues={(['', 'name', 'location', 'date'])}
           handleTableEditClick={id => editShow(id)}
-        />
+        >
+          <RenderedSwitch
+            checked={initialValues !== null && initialValues.activeShow}
+          />
+        </DefaultTable>
         <AddButton onClick={addShow} />
       </div>
     );
@@ -180,26 +169,21 @@ ShowsContainer.propTypes = {
   recordAdd: PropTypes.func.isRequired,
   loadData: PropTypes.func.isRequired,
   setRecordToUpdate: PropTypes.func.isRequired,
-  setRecordActive: PropTypes.func.isRequired,
-  unsetRecordActive: PropTypes.func.isRequired,
   recordUpdate: PropTypes.func.isRequired,
   clearUpdateRecord: PropTypes.func.isRequired,
   recordDelete: PropTypes.func.isRequired,
   initialValues: PropTypes.object,
-  shows: PropTypes.array,
-  activeShow: PropTypes.string
+  shows: PropTypes.array
 };
 
 ShowsContainer.defaultProps = {
   initialValues: null,
-  shows: null,
-  activeShow: null
+  shows: null
 };
 
 const mapStateToProps = state => ({
   initialValues: state.shows.updateShow,
-  shows: state.shows.shows,
-  activeShow: state.shows.activeShow
+  shows: state.shows.shows
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -208,9 +192,7 @@ const mapDispatchToProps = dispatch => ({
   recordUpdate: show => dispatch(updateRecord(show)),
   recordAdd: show => dispatch(createRecord(show)),
   recordDelete: showId => dispatch(deleteRecord(showId)),
-  clearUpdateRecord: showId => dispatch(unsetUpdateRecord(showId)),
-  setRecordActive: showId => dispatch(setActiveRecord(showId)),
-  unsetRecordActive: showId => dispatch(unsetActiveRecord(showId))
+  clearUpdateRecord: showId => dispatch(unsetUpdateRecord(showId))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShowsContainer);

@@ -24,7 +24,7 @@ const styles = theme => ({
 
 const DefaultTable = (props) => {
   const {
-    classes, data, tableHeaders, shownDataValues, handleTableEditClick
+    classes, data, children, tableHeaders, shownDataValues, handleTableEditClick
   } = props;
   if (data === null) {
     return (
@@ -56,6 +56,9 @@ const DefaultTable = (props) => {
             <TableRow key={d.id} name={d.id}>
               <TableCell>
                 <EditButton onClick={() => editAction(d.id)} />
+              </TableCell>
+              <TableCell>
+                {children}
               </TableCell>
               {Object.keys(d).map((key) => {
                 if (shownDataValues.includes(key)) {

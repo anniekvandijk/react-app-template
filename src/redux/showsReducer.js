@@ -3,8 +3,7 @@ import Api from '../client/api/Api';
 
 const initialState = {
   shows: null,
-  updateShow: null,
-  activeShow: null
+  updateShow: null
 };
 
 const actionType = {
@@ -15,9 +14,7 @@ const actionType = {
   DELETE_RECORD: 'DELETE_RECORD',
   UPDATE_RECORD: 'UPDATE_RECORD',
   SET_UPDATE_RECORD: 'SET_UPDATE_RECORD',
-  UNSET_UPDATE_RECORD: 'UNSET_UPDATE_RECORD',
-  SET_ACTIVE_RECORD: 'SET_ACTIVE_RECORD',
-  UNSET_ACTIVE_RECORD: 'UNSET_ACTIVE_RECORD'
+  UNSET_UPDATE_RECORD: 'UNSET_UPDATE_RECORD'
 };
 
 const apiCallStarted = createAction(actionType.API_CALL_STARTED);
@@ -28,8 +25,6 @@ const deleteRecord = createAction(actionType.DELETE_RECORD);
 const updateRecord = createAction(actionType.UPDATE_RECORD);
 const setUpdateRecord = createAction(actionType.SET_UPDATE_RECORD);
 const unsetUpdateRecord = createAction(actionType.UNSET_UPDATE_RECORD);
-const setActiveRecord = createAction(actionType.SET_ACTIVE_RECORD);
-const unsetActiveRecord = createAction(actionType.UNSET_ACTIVE_RECORD);
 
 const readRecords = path => (dispatch) => {
   dispatch(apiCallStarted());
@@ -65,22 +60,6 @@ const showsReducer = (state = initialState, action) => {
         ...state,
         updateShow: null
       };
-    case actionType.SET_ACTIVE_RECORD:
-      const active = state.shows.filter(shows => shows.id === action.payload)[0]
-      active.activeShow = true;
-      console.log('active show', active);
-      return {
-        ...state,
-        shows: state.shows.filter(shows => shows.id !== action.payload).concat(active)
-      };
-    case actionType.UNSET_ACTIVE_RECORD:
-      const inActive = state.shows.filter(shows => shows.id === action.payload)[0]
-      inActive.activeShow = false;
-      console.log('inactive show', inActive);
-      return {
-        ...state,
-        shows: state.shows.filter(shows => shows.id !== action.payload).concat(inActive)
-      };
     case actionType.API_CALL_STARTED:
       return state;
     case actionType.API_SUCCESS:
@@ -99,7 +78,5 @@ export {
   deleteRecord,
   setUpdateRecord,
   updateRecord,
-  unsetUpdateRecord,
-  setActiveRecord,
-  unsetActiveRecord
+  unsetUpdateRecord
 };
