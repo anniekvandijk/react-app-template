@@ -5,13 +5,18 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 
 const RenderedSwitch = (props) => {
-  const { checked, onChange, label } = props;
+  const {
+    disabled, label, value, input, ...extra
+  } = props;
   return (
     <FormControlLabel
+      id="switch"
       control={(
         <Switch
-          checked={checked}
-          onChange={onChange}
+          disabled={disabled}
+          {...input}
+          {...extra}
+          value={value}
         />
         )
       }
@@ -21,8 +26,6 @@ const RenderedSwitch = (props) => {
 };
 
 RenderedSwitch.propTypes = {
-  checked: PropTypes.bool.isRequired,
-  onChange: PropTypes.func.isRequired,
   label: PropTypes.string
 };
 

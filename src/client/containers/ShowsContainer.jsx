@@ -3,17 +3,16 @@ import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import { connect } from 'react-redux';
 import { Field } from 'redux-form';
-import Paper from '@material-ui/core/Paper';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import FormDialog from '../components/dialogs/FormDialog';
 import AlertDialog from '../components/dialogs/AlertDialog';
 import DefaultTable from '../components/tables/DefaultTable';
 import RenderedTextField from '../components/formFields/TextField';
 import AddButton from '../components/buttons/AddButton';
+import RenderedSwitch from '../components/formFields/Switch';
 import {
   createRecord, updateRecord, unsetUpdateRecord, deleteRecord, readRecords, setUpdateRecord
 } from '../../redux/showsReducer';
-import RenderedSwitch from '../components/formFields/Switch';
 
 class ShowsContainer extends React.PureComponent {
   state = {
@@ -29,8 +28,7 @@ class ShowsContainer extends React.PureComponent {
   render() {
     const {
       shows, recordUpdate, recordAdd, clearUpdateRecord,
-      setRecordToUpdate, recordDelete, initialValues, 
-      unsetRecordActive, setRecordActive
+      setRecordToUpdate, recordDelete, initialValues
     } = this.props;
     const { alertDialogOpen, formDialogOpen } = this.state;
     const header = initialValues === null ? 'Add show' : 'Edit show';
@@ -83,24 +81,6 @@ class ShowsContainer extends React.PureComponent {
       this.setState({ formDialogOpen: false });
     };
 
-    /*
-      handle active show
-    */
-
-    const handleActiveShow = (id, bool) => {
-      console.log('handle this');
-      if (bool === true) {
-        // set all records on inactive exept selected one
-        shows.map((s) => {
-          if (s.id === id) {
-            setRecordActive(id);
-          } else {
-            unsetRecordActive(id);
-          }
-        });
-      }
-    };
-
     return (
       <div id="showscontainer">
         <AlertDialog
@@ -134,31 +114,29 @@ class ShowsContainer extends React.PureComponent {
           <Field
             name="name"
             label="Show name"
+            type="text"
             helperText="Enter name without location or date"
             component={RenderedTextField}
           />
           <Field
             name="location"
             label="Show Location"
+            type="text"
             component={RenderedTextField}
           />
-          <RenderedSwitch
+          <Field
             name="activeShow"
             label="Show active"
-            checked={initialValues !== null && initialValues.activeShow}
-            onChange={id => handleActiveShow(id, false)}
+            type="checkbox"
+            component={RenderedSwitch}
           />
         </FormDialog>
         <DefaultTable
           data={shows}
           tableHeaders={(['Active', 'Name', 'Date', 'Location'])}
-          shownDataValues={(['', 'name', 'location', 'date'])}
+          shownDataValues={(['activeShow', 'name', 'location', 'date'])}
           handleTableEditClick={id => editShow(id)}
-        >
-          <RenderedSwitch
-            checked={initialValues !== null && initialValues.activeShow}
-          />
-        </DefaultTable>
+        />
         <AddButton onClick={addShow} />
       </div>
     );

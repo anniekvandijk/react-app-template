@@ -7,7 +7,9 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import orange from '@material-ui/core/colors/orange';
 import EditButton from '../buttons/EditButton';
+import RenderedSwitch from '../formFields/Switch';
 import Loader from '../Loader';
 
 const styles = theme => ({
@@ -19,12 +21,23 @@ const styles = theme => ({
   },
   table: {
     width: '100%'
-  }
+  },
+  colorSwitchBase: {
+    color: orange[300],
+    '&$colorChecked': {
+      color: orange[500],
+      '& + $colorBar': {
+        backgroundColor: orange[500]
+      }
+    }
+  },
+  colorChecked: {},
+  colorBar: {}
 });
 
 const DefaultTable = (props) => {
   const {
-    classes, data, children, tableHeaders, shownDataValues, handleTableEditClick
+    classes, data, tableHeaders, shownDataValues, handleTableEditClick
   } = props;
   if (data === null) {
     return (
@@ -57,11 +70,23 @@ const DefaultTable = (props) => {
               <TableCell>
                 <EditButton onClick={() => editAction(d.id)} />
               </TableCell>
-              <TableCell>
-                {children}
-              </TableCell>
               {Object.keys(d).map((key) => {
                 if (shownDataValues.includes(key)) {
+                  if (d[key] === true || d[key] === false) {
+                    return (
+                      <TableCell key={d.id + d[key]}>
+                        <RenderedSwitch
+                          disabled
+                          checked={d[key]}
+                          classes={{
+                            switchBase: classes.colorSwitchBase,
+                            checked: classes.colorChecked,
+                            bar: classes.colorBar
+                          }}
+                        />
+                      </TableCell>
+                    );
+                  }
                   return (
                     <TableCell key={d.id + d[key]}>{d[key]}</TableCell>
                   );
